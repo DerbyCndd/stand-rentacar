@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { useVehicles } from "@/lib/store";
 import { VehicleCard } from "@/components/Cards";
 import { FinanceSim } from "@/components/FinanceSim";
-import { kz } from "@/lib/format";
+import { eur } from "@/lib/format";
 
 const bodies = [
   ["", "Todos"],
@@ -24,10 +24,10 @@ export function ComprarClient() {
   const [gear, setGear] = useState("");
   const [max, setMax] = useState(Number(sp.get("max")) || 0);
   const [sort, setSort] = useState("rec");
-  const [simPrice, setSimPrice] = useState(30000000);
+  const [simPrice, setSimPrice] = useState(10000);
 
   const brands = useMemo(() => [...new Set(list.map((v) => v.brand))].sort(), [list]);
-  const top = Math.max(...list.map((v) => v.price), 1000000);
+  const top = Math.max(...list.map((v) => v.price), 5000);
 
   const shown = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -41,11 +41,11 @@ export function ComprarClient() {
         (!max || v.price <= max),
     );
     const order: Record<string, (a: (typeof r)[0], b: (typeof r)[0]) => number> = {
-      rec: (a, b) => Number(b.featured) - Number(a.featured) || b.year - a.year,
+      rec: (a, b) => Number(b.featured) - Number(a.featured) || (b.year ?? 0) - (a.year ?? 0),
       pa: (a, b) => a.price - b.price,
       pd: (a, b) => b.price - a.price,
-      yd: (a, b) => b.year - a.year,
-      ka: (a, b) => a.km - b.km,
+      yd: (a, b) => (b.year ?? 0) - (a.year ?? 0),
+      ka: (a, b) => (a.km ?? 1e9) - (b.km ?? 1e9),
     };
     return [...r].sort((a, b) => Number(a.status === "vendido") - Number(b.status === "vendido") || order[sort](a, b));
   }, [list, q, brand, body, fuel, gear, max, sort]);
@@ -98,8 +98,8 @@ export function ComprarClient() {
               </select>
             </div>
             <div className="field">
-              <label htmlFor="max">Preço máximo: {max ? kz(max) : "sem limite"}</label>
-              <input id="max" className="range" type="range" min={0} max={top} step={1000000} value={max || top} onChange={(e) => setMax(+e.target.value >= top ? 0 : +e.target.value)} />
+              <label htmlFor="max">Preço máximo: {max ? eur(max) : "sem limite"}</label>
+              <input id="max" className="range" type="range" min={0} max={top} step={1000} value={max || top} onChange={(e) => setMax(+e.target.value >= top ? 0 : +e.target.value)} />
             </div>
             <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={clear}>Limpar filtros</button>
           </aside>
@@ -138,8 +138,8 @@ export function ComprarClient() {
             <h2 id="fin" className="h2" style={{ marginTop: 12 }}>Quanto vai pagar por mês?</h2>
             <p className="lead muted" style={{ marginTop: 14 }}>Escolha um valor, a entrada e o prazo. Depois peça uma proposta sem compromisso.</p>
             <div className="field" style={{ marginTop: 22, maxWidth: 360 }}>
-              <label htmlFor="simp">Preço da viatura (Kz)</label>
-              <input id="simp" className="input" type="number" min={1000000} step={500000} value={simPrice} onChange={(e) => setSimPrice(Math.max(0, +e.target.value))} />
+              <label htmlFor="simp">Preço da viatura (€)</label>
+              <input id="simp" className="input" type="number" min={1000} step={500} value={simPrice} onChange={(e) => setSimPrice(Math.max(0, +e.target.value))} />
             </div>
           </div>
           <div className="panel" style={{ color: "var(--ink)" }}>

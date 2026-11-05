@@ -9,12 +9,12 @@ import { seedRentals, seedVehicles } from "./data";
  * (ver README): basta reimplementar este ficheiro com chamadas à API.
  */
 const KEYS = {
-  vehicles: "kwanza.vehicles.v1",
-  rentals: "kwanza.rentals.v1",
-  leads: "kwanza.leads.v1",
+  vehicles: "autoferasa.vehicles.v4",
+  rentals: "autoferasa.rentals.v2",
+  leads: "autoferasa.leads.v1",
 } as const;
 type Key = keyof typeof KEYS;
-const EVT = "kwanza-store";
+const EVT = "autoferasa-store";
 const NO_LEADS: Lead[] = [];
 
 const cache = new Map<Key, { raw: string | null; list: unknown[] }>();
@@ -90,8 +90,8 @@ export function addLead(lead: Omit<Lead, "id" | "createdAt" | "done">) {
 }
 
 /* Sessão do painel (apenas demonstração) */
-const SESSION = "kwanza.admin.session";
-const SESSION_EVT = "kwanza-session";
+const SESSION = "autoferasa.admin.session";
+const SESSION_EVT = "autoferasa-session";
 export function useAdminSession() {
   const state = useSyncExternalStore(
     (cb) => {

@@ -13,8 +13,9 @@ export interface Vehicle {
   id: string;
   brand: string;
   model: string;
-  year: number;
-  km: number;
+  /** null = a confirmar */
+  year: number | null;
+  km: number | null;
   price: number;
   fuel: Fuel;
   gearbox: Gearbox;
@@ -29,7 +30,7 @@ export interface Vehicle {
   featured: boolean;
   isNew: boolean;
   /** Fotografia real (data URL). Se vazia, usa-se a ilustração. */
-  photo?: string;
+  photos?: string[];
   colors?: ColorStock[];
 }
 
@@ -50,7 +51,7 @@ export interface RentalCar {
   bags: number;
   features: string[];
   available: boolean;
-  photo?: string;
+  photos?: string[];
   colors?: ColorStock[];
 }
 

@@ -1,8 +1,8 @@
-# Kwanza Motors · Stand & Rent a Car
+# AutoFerasa · Stand & Rent a Car
 
 Site de um stand automóvel com serviço de aluguer de viaturas, feito com **Next.js 16** (App Router, TypeScript) e exportado como site estático para o **GitHub Pages**.
 
-> "Kwanza Motors", o logótipo, os preços, os contactos e as viaturas são **dados de exemplo**. Substitua-os pelos reais.
+> O stand fica em Braga e os preços estão em euros. Os restantes textos e a frota de aluguer ainda são **dados de exemplo**: substitua-os pelos reais no painel.
 
 ## O que tem
 

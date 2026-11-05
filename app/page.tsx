@@ -5,12 +5,12 @@ import { Featured } from "@/components/Featured";
 import { site, wa } from "@/lib/site";
 
 const categories = [
-  ["Económico", "Cidade e poupança", "desde 28 000 Kz/dia"],
-  ["Compacto", "Conforto diário", "desde 42 000 Kz/dia"],
-  ["SUV", "Espaço e robustez", "desde 55 000 Kz/dia"],
-  ["Executivo", "Com ou sem motorista", "desde 150 000 Kz/dia"],
-  ["Pickup", "Trabalho e campo", "desde 85 000 Kz/dia"],
-  ["Minibus", "Grupos até 14 pessoas", "desde 98 000 Kz/dia"],
+  ["Económico", "Cidade e poupança", "Preço sob consulta"],
+  ["Compacto", "Conforto diário", "Preço sob consulta"],
+  ["SUV", "Espaço e robustez", "Preço sob consulta"],
+  ["Executivo", "Com ou sem motorista", "Preço sob consulta"],
+  ["Pickup", "Trabalho e campo", "Preço sob consulta"],
+  ["Minibus", "Grupos até 14 pessoas", "Preço sob consulta"],
 ];
 
 export default function Home() {
@@ -20,7 +20,7 @@ export default function Home() {
         <div className="hero-road" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div>
-            <p className="kicker">Stand &amp; Rent a Car · Luanda</p>
+            <p className="kicker">Stand &amp; Rent a Car · Braga</p>
             <h1 className="display" style={{ marginTop: 18 }}>
               A sua próxima <span>viatura</span> começa aqui.
             </h1>
@@ -107,7 +107,7 @@ export default function Home() {
           <div className="why">
             {[
               ["✓", "Viaturas inspecionadas", "Cada viatura passa por uma revisão técnica antes de ser anunciada."],
-              ["Kz", "Preços transparentes", "Preço de venda e custo total de aluguer sempre visíveis, sem taxas escondidas."],
+              ["€", "Preços transparentes", "Preço de venda e custo total de aluguer sempre visíveis, sem taxas escondidas."],
               ["%", "Financiamento à medida", "Simule a prestação na própria página e peça uma proposta sem compromisso."],
               ["24h", "Apoio por WhatsApp", "Fale connosco quando lhe der jeito, inclusive em caso de avaria durante o aluguer."],
             ].map(([i, t, d]) => (

@@ -280,3 +280,11 @@ tr:last-child td { border-bottom: 0; }
 .photo-edit img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line-paper); }
 .color-row { display: grid; grid-template-columns: 44px 1fr 84px auto; gap: 8px; align-items: center; margin-bottom: 8px; }
 .color-row .input { min-width: 0; }
+
+.thumbs { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; margin-top: 10px; list-style: none; padding: 0; }
+.thumbs button { display: block; width: 100%; padding: 0; border: 2px solid transparent; border-radius: 6px; overflow: hidden; background: none; cursor: pointer; }
+.thumbs button[aria-current="true"] { border-color: var(--amber); }
+.thumbs button:focus-visible { outline: 3px solid var(--amber); outline-offset: 2px; }
+.thumbs img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; list-style: none; padding: 0; }
+.photo-grid .actions { margin-top: 6px; gap: 6px; }

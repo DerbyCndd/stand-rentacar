@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAdminSession, useLeads, useRentals, useVehicles } from "@/lib/store";
 import { site } from "@/lib/site";
-import { kz, uid } from "@/lib/format";
+import { eur, uid } from "@/lib/format";
 import type { Body, ColorStock, Fuel, Gearbox, RentalCar, RentCategory, Vehicle } from "@/lib/types";
 import { fileToPhoto, totalQty } from "@/lib/stock";
 import { CarImage } from "@/components/CarImage";
@@ -158,9 +158,9 @@ function VehiclesAdmin() {
         <div className="form-grid">
           <Text id="vb" label="Marca" required value={f.brand} onChange={(v) => set("brand", v)} />
           <Text id="vm" label="Modelo" required value={f.model} onChange={(v) => set("model", v)} />
-          <Text id="vy" label="Ano" type="number" required value={f.year} onChange={(v) => set("year", +v)} min={1990} max={2100} />
-          <Text id="vk" label="Quilómetros" type="number" value={f.km} onChange={(v) => set("km", +v)} min={0} />
-          <div className="full"><Text id="vp" label="Preço (Kz)" type="number" required value={f.price} onChange={(v) => set("price", +v)} min={0} /></div>
+          <Text id="vy" label="Ano" type="number" value={f.year ?? ""} onChange={(v) => set("year", v === "" ? null : +v)} min={1990} max={2100} />
+          <Text id="vk" label="Quilómetros" type="number" value={f.km ?? ""} onChange={(v) => set("km", v === "" ? null : +v)} min={0} />
+          <div className="full"><Text id="vp" label="Preço (€)" type="number" required value={f.price} onChange={(v) => set("price", +v)} min={0} /></div>
           <Pick id="vf" label="Combustível" value={f.fuel} options={FUELS} onChange={(v) => set("fuel", v)} />
           <Pick id="vg" label="Caixa" value={f.gearbox} options={GEARS} onChange={(v) => set("gearbox", v)} />
           <Pick id="vbody" label="Carroçaria" value={f.body} options={BODIES} onChange={(v) => set("body", v)} />
@@ -171,7 +171,7 @@ function VehiclesAdmin() {
           <Pick id="vst" label="Estado" value={f.status} options={[["disponivel", "Disponível"], ["reservado", "Reservado"], ["vendido", "Vendido"]]} onChange={(v) => set("status", v)} />
           <div className="full field"><label htmlFor="vfe">Equipamento (separado por vírgulas)</label><input id="vfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Câmara 360°, Bancos em pele" /></div>
           <div className="full field"><label htmlFor="vd">Descrição</label><textarea id="vd" className="textarea" value={f.description} onChange={(e) => set("description", e.target.value)} /></div>
-          <div className="full"><PhotoField photo={f.photo} onChange={(p) => set("photo", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
           <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} /></div>
           <label className="check"><input type="checkbox" checked={f.featured} onChange={(e) => set("featured", e.target.checked)} /> Destaque na página inicial</label>
           <label className="check"><input type="checkbox" checked={f.isNew} onChange={(e) => set("isNew", e.target.checked)} /> Viatura nova</label>
@@ -191,8 +191,8 @@ function VehiclesAdmin() {
             <tbody>
               {list.map((v) => (
                 <tr key={v.id}>
-                  <td><strong>{v.brand} {v.model}</strong><br /><span className="muted">{v.year} · {v.fuel}</span></td>
-                  <td>{kz(v.price)}</td>
+                  <td><strong>{v.brand} {v.model}</strong><br /><span className="muted">{v.year ?? "Ano a confirmar"} · {v.fuel}</span></td>
+                  <td>{eur(v.price)}</td>
                   <td><Dots colors={v.colors} /></td>
                   <td>
                     <span className={`badge${v.status === "disponivel" ? "" : v.status === "reservado" ? " warn" : " off"}`}>{v.status === "disponivel" ? "Disponível" : v.status === "reservado" ? "Reservado" : "Vendido"}</span>
@@ -240,7 +240,7 @@ function RentalsAdmin() {
           <Text id="rm" label="Modelo" required value={f.model} onChange={(v) => set("model", v)} />
           <Text id="ry" label="Ano" type="number" value={f.year} onChange={(v) => set("year", +v)} min={1990} max={2100} />
           <Pick id="rc" label="Categoria" value={f.category} options={CATS} onChange={(v) => set("category", v)} />
-          <div className="full"><Text id="rp" label="Preço por dia (Kz)" type="number" required value={f.pricePerDay} onChange={(v) => set("pricePerDay", +v)} min={0} /></div>
+          <div className="full"><Text id="rp" label="Preço por dia (€)" type="number" required value={f.pricePerDay} onChange={(v) => set("pricePerDay", +v)} min={0} /></div>
           <Pick id="rf" label="Combustível" value={f.fuel} options={FUELS} onChange={(v) => set("fuel", v)} />
           <Pick id="rg" label="Caixa" value={f.gearbox} options={GEARS} onChange={(v) => set("gearbox", v)} />
           <Pick id="rbody" label="Carroçaria" value={f.body} options={BODIES} onChange={(v) => set("body", v)} />
@@ -248,7 +248,7 @@ function RentalsAdmin() {
           <Text id="rs" label="Lugares" type="number" value={f.seats} onChange={(v) => set("seats", +v)} min={1} max={20} />
           <Text id="rbags" label="Malas" type="number" value={f.bags} onChange={(v) => set("bags", +v)} min={0} max={20} />
           <div className="full field"><label htmlFor="rfe">Incluído (separado por vírgulas)</label><input id="rfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Ar condicionado, Bluetooth" /></div>
-          <div className="full"><PhotoField photo={f.photo} onChange={(p) => set("photo", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
           <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} unit="disponíveis" /></div>
           <label className="check full"><input type="checkbox" checked={f.available} onChange={(e) => set("available", e.target.checked)} /> Disponível para aluguer</label>
         </div>
@@ -268,7 +268,7 @@ function RentalsAdmin() {
               {list.map((r) => (
                 <tr key={r.id}>
                   <td><strong>{r.brand} {r.model}</strong><br /><span className="muted">{r.category} · {r.seats} lugares</span></td>
-                  <td>{kz(r.pricePerDay)}</td>
+                  <td>{eur(r.pricePerDay)}</td>
                   <td><Dots colors={r.colors} /></td>
                   <td><span className={`badge${r.available ? "" : " off"}`}>{r.available ? "Disponível" : "Indisponível"}</span></td>
                   <td>
@@ -304,34 +304,49 @@ function Dots({ colors }: { colors?: ColorStock[] }) {
   );
 }
 
-function PhotoField({ photo, onChange, body, color, label }: { photo?: string; onChange: (p: string | undefined) => void; body: Body; color: string; label: string }) {
+function PhotoField({ photos, onChange, body, color, label }: { photos: string[]; onChange: (p: string[]) => void; body: Body; color: string; label: string }) {
   const [err, setErr] = useState("");
   return (
     <div className="photo-edit">
       <div className="field">
-        <label htmlFor="photo-file">Fotografia real</label>
+        <label htmlFor="photo-file">Fotografias reais (a primeira é a capa)</label>
         <input
           id="photo-file"
           className="input"
           type="file"
           accept="image/*"
+          multiple
           onChange={async (e) => {
-            const file = e.target.files?.[0];
+            const files = Array.from(e.target.files ?? []);
             e.target.value = "";
-            if (!file) return;
+            if (!files.length) return;
             try {
               setErr("");
-              onChange(await fileToPhoto(file));
+              const added = await Promise.all(files.map((f) => fileToPhoto(f)));
+              onChange([...photos, ...added]);
             } catch (x) {
               setErr(x instanceof Error ? x.message : "Não foi possível ler a imagem.");
             }
           }}
         />
         {err && <span className="err" role="alert">{err}</span>}
-        <span className="hint">A imagem é reduzida automaticamente. Sem fotografia, o site mostra a ilustração.</span>
+        <span className="hint">As imagens são reduzidas automaticamente. Sem fotografias, o site mostra a ilustração.</span>
       </div>
-      <CarImage photo={photo} body={body} color={color} label={label} />
-      {photo && <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={() => onChange(undefined)}>Remover fotografia</button>}
+      {photos.length === 0 ? (
+        <CarImage body={body} color={color} label={label} />
+      ) : (
+        <ul className="photo-grid">
+          {photos.map((p, n) => (
+            <li key={p.slice(-40) + n}>
+              <CarImage photo={p} body={body} color={color} label={`${label} ${n + 1}`} />
+              <div className="actions">
+                {n > 0 && <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={() => onChange([p, ...photos.filter((_, j) => j !== n)])}>Capa</button>}
+                <button type="button" className="btn btn-danger btn-sm" onClick={() => onChange(photos.filter((_, j) => j !== n))}>Remover</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
     </div>
   );
 }

@@ -2,11 +2,11 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useVehicles } from "@/lib/store";
-import { CarImage, ColorList } from "@/components/CarImage";
+import { Gallery, ColorList } from "@/components/CarImage";
 import { FinanceSim } from "@/components/FinanceSim";
 import { LeadForm } from "@/components/LeadForm";
 import { VehicleCard } from "@/components/Cards";
-import { km, kz } from "@/lib/format";
+import { kmLabel, eur } from "@/lib/format";
 import { wa } from "@/lib/site";
 
 export function VeiculoClient() {
@@ -27,7 +27,7 @@ export function VeiculoClient() {
     );
 
   const related = list.filter((x) => x.id !== v.id && x.status !== "vendido" && (x.body === v.body || x.brand === v.brand)).slice(0, 3);
-  const msg = `Olá! Tenho interesse no ${v.brand} ${v.model} ${v.year} (${kz(v.price)}).`;
+  const msg = `Olá! Tenho interesse no ${v.brand} ${v.model}${v.year ? ` ${v.year}` : ""} (${eur(v.price)}).`;
 
   return (
     <div className="wrap section" style={{ paddingBlock: "var(--space-6) var(--space-8)" }}>
@@ -37,9 +37,7 @@ export function VeiculoClient() {
 
       <div className="detail">
         <div>
-          <div className="stage">
-            <CarImage photo={v.photo} body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
-          </div>
+          <Gallery photos={v.photos} body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
 
           <div style={{ marginTop: 28 }}>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
@@ -48,14 +46,14 @@ export function VeiculoClient() {
               </span>
               <span className="muted">{v.brand}</span>
             </div>
-            <h1 className="h2" style={{ marginTop: 10 }}>{v.model} · {v.year}</h1>
+            <h1 className="h2" style={{ marginTop: 10 }}>{v.model}{v.year ? ` · ${v.year}` : ""}</h1>
             <p className="lead muted" style={{ marginTop: 12 }}>{v.description}</p>
             <ColorList colors={v.colors} />
           </div>
 
           <dl className="spec-table" style={{ marginTop: 28 }}>
             {[
-              ["Ano", v.year], ["Quilometragem", v.km === 0 ? "0 km" : km(v.km)], ["Combustível", v.fuel], ["Caixa", v.gearbox],
+              ["Ano", v.year ?? "A confirmar"], ["Quilometragem", kmLabel(v.km)], ["Combustível", v.fuel], ["Caixa", v.gearbox],
               ["Motor", v.engine], ["Potência", v.power], ["Lugares", v.seats],
             ].map(([k, val]) => (
               <div key={k as string}><dt>{k}</dt><dd>{val}</dd></div>
@@ -71,7 +69,7 @@ export function VeiculoClient() {
         <aside className="sticky-side">
           <div className="panel">
             <p className="muted">Preço</p>
-            <p className="price" style={{ fontSize: "2.4rem" }}>{kz(v.price)}</p>
+            <p className="price" style={{ fontSize: "2.4rem" }}>{eur(v.price)}</p>
             {v.status === "disponivel" ? (
               <a className="btn btn-wa" style={{ width: "100%", marginTop: 16 }} href={wa(msg)} target="_blank" rel="noopener noreferrer">Perguntar por WhatsApp</a>
             ) : (
@@ -80,7 +78,7 @@ export function VeiculoClient() {
           </div>
           <div className="panel">
             <h2 className="h3" style={{ marginBottom: 14 }}>Marcar visita / test drive</h2>
-            <LeadForm kind="Visita" subject={`Quero marcar visita para ver o ${v.brand} ${v.model} ${v.year}`} presetMessage="Quando posso ver a viatura?" cta="Pedir visita" />
+            <LeadForm kind="Visita" subject={`Quero marcar visita para ver o ${v.brand} ${v.model}${v.year ? ` ${v.year}` : ""}`} presetMessage="Quando posso ver a viatura?" cta="Pedir visita" />
           </div>
           <div className="panel"><FinanceSim price={v.price} /></div>
         </aside>

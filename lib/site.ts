@@ -1,14 +1,14 @@
 /** Dados da empresa. Edite aqui: nome, contactos e morada aparecem em todo o site. */
 export const site = {
-  name: "Kwanza Motors",
-  tagline: "Stand automóvel & Rent a Car em Luanda",
+  name: "AutoFerasa",
+  tagline: "Stand automóvel & Rent a Car em Braga",
   description:
     "Viaturas novas e usadas com garantia, financiamento à medida e aluguer de viaturas com ou sem motorista. Atendimento rápido por WhatsApp.",
-  phone: "+244 900 000 000",
+  phone: "+351 933 210 514",
   /** Apenas dígitos, com indicativo (usado nos links de WhatsApp). */
-  whatsapp: "244900000000",
-  email: "geral@kwanzamotors.example",
-  address: "Av. 21 de Janeiro, Luanda, Angola",
+  whatsapp: "351933210514",
+  email: "grupoferasa.info@gmail.com",
+  address: "Rua Padre Manuel Guimarães 5M1, n.º 26, 2.º Esq., Real, 4700-284 Braga",
   hours: [
     ["Segunda a sexta", "08:00 – 18:00"],
     ["Sábado", "09:00 – 14:00"],

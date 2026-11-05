@@ -1,31 +1,69 @@
 import type { Vehicle, RentalCar } from "./types";
 
 export const seedVehicles: Vehicle[] = [
-  { id: "v1", brand: "Toyota", model: "Land Cruiser Prado", year: 2022, km: 28000, price: 64500000, fuel: "Diesel", gearbox: "Automática", body: "suv", color: "#2f3a33", seats: 7, engine: "2.8 D-4D", power: "204 cv", features: ["Tração integral", "Câmara 360°", "Bancos em pele", "Teto de abrir", "Apple CarPlay", "7 lugares"], description: "Prado em estado impecável, revisões na marca, único dono. Ideal para quem precisa de conforto na cidade e robustez nas estradas do interior.", colors: [{ name: "Verde escuro", hex: "#2f3a33", qty: 2 }], status: "disponivel", featured: true, isNew: false },
-  { id: "v2", brand: "Toyota", model: "Hilux 4x4", year: 2023, km: 12000, price: 52900000, fuel: "Diesel", gearbox: "Manual", body: "pickup", color: "#b9b6ad", seats: 5, engine: "2.4 D-4D", power: "150 cv", features: ["Cabine dupla", "4x4 com bloqueio", "Cobertura de caixa", "Ar condicionado", "Bluetooth"], description: "Hilux de cabine dupla com poucos quilómetros, pronta para trabalho e lazer.", colors: [{ name: "Cinzento", hex: "#b9b6ad", qty: 3 }], status: "disponivel", featured: true, isNew: false },
-  { id: "v3", brand: "Hyundai", model: "Tucson", year: 2024, km: 0, price: 41800000, fuel: "Híbrido", gearbox: "Automática", body: "suv", color: "#6d1f2b", seats: 5, engine: "1.6 T-GDI Hybrid", power: "230 cv", features: ["Zero km", "Garantia de fábrica 5 anos", "Ecrã 10,25\"", "Assistente de faixa", "Carregamento sem fios"], description: "SUV híbrido novo, com garantia de fábrica e consumo muito baixo.", colors: [{ name: "Bordeaux", hex: "#6d1f2b", qty: 1 }], status: "disponivel", featured: true, isNew: true },
-  { id: "v4", brand: "Kia", model: "Picanto", year: 2023, km: 9000, price: 14900000, fuel: "Gasolina", gearbox: "Manual", body: "hatch", color: "#e8c547", seats: 5, engine: "1.0 MPI", power: "67 cv", features: ["Ar condicionado", "Câmara de marcha-atrás", "Bluetooth", "Baixo consumo"], description: "O citadino perfeito para Luanda: económico, ágil e fácil de estacionar.", colors: [{ name: "Amarelo", hex: "#e8c547", qty: 2 }], status: "disponivel", featured: false, isNew: false },
-  { id: "v5", brand: "Mercedes-Benz", model: "Classe C 200", year: 2021, km: 41000, price: 38700000, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#1b1f24", seats: 5, engine: "1.5 EQ Boost", power: "184 cv", features: ["Pack AMG Line", "Bancos aquecidos", "Navegação", "Luz ambiente", "Sensores 360°"], description: "Berlina executiva com histórico de manutenção completo.", colors: [{ name: "Preto", hex: "#1b1f24", qty: 3 }], status: "reservado", featured: false, isNew: false },
-  { id: "v6", brand: "Nissan", model: "Qashqai", year: 2022, km: 33000, price: 27500000, fuel: "Gasolina", gearbox: "Automática", body: "suv", color: "#5d7a9a", seats: 5, engine: "1.3 DIG-T", power: "140 cv", features: ["Teto panorâmico", "ProPILOT", "Câmara 360°", "Apple CarPlay"], description: "Crossover familiar, confortável e bem equipado.", colors: [{ name: "Azul", hex: "#5d7a9a", qty: 1 }], status: "disponivel", featured: false, isNew: false },
-  { id: "v7", brand: "Toyota", model: "Corolla", year: 2020, km: 58000, price: 19800000, fuel: "Híbrido", gearbox: "Automática", body: "sedan", color: "#d9d9d6", seats: 5, engine: "1.8 Hybrid", power: "122 cv", features: ["Consumo reduzido", "Toyota Safety Sense", "Câmara traseira", "Bluetooth"], description: "Corolla híbrido muito económico e fiável.", colors: [{ name: "Prata", hex: "#d9d9d6", qty: 2 }], status: "disponivel", featured: false, isNew: false },
-  { id: "v8", brand: "Volkswagen", model: "Polo", year: 2022, km: 24000, price: 17200000, fuel: "Gasolina", gearbox: "Manual", body: "hatch", color: "#c4442f", seats: 5, engine: "1.0 TSI", power: "95 cv", features: ["Ecrã 8\"", "Sensores de estacionamento", "Ar condicionado automático"], description: "Compacto bem construído e divertido de conduzir.", colors: [{ name: "Vermelho", hex: "#c4442f", qty: 3 }], status: "disponivel", featured: false, isNew: false },
+  {
+    id: "v1", brand: "BMW", model: "Série 1 116d", year: 2012, km: 165000, price: 10900, fuel: "Diesel", gearbox: "Manual", body: "hatch", color: "#5b5f63", seats: 5, engine: "2.0 116d", power: "116 cv",
+    features: [
+      "Jantes de liga leve 17\"", "Teto estrelado com iluminação ambiente", "Vidros escuros", "Suspensão rebaixada", "Volante multifunções", "Computador de bordo",
+      "Bancos com design desportivo", "Painel de instrumentos BMW", "Climatização", "Sistema de áudio integrado", "Vidros elétricos", "Retrovisores exteriores", "Fecho centralizado", "Direção assistida",
+    ],
+    description: "Visual personalizado com identidade desportiva: teto estrelado, suspensão rebaixada e jantes de 17\". Excelente apresentação exterior e interior, revisão efetuada e pronto para circular. Garantia de 18 meses. Financiamento possível, aceite em até 24h, por aproximadamente 160 €/mês. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: true, isNew: false,
+    colors: [{ name: "Cinzento mate", hex: "#5b5f63", qty: 1 }],
+    photos: ["/cars/bmw-116d-01.jpg","/cars/bmw-116d-02.jpg","/cars/bmw-116d-03.jpg","/cars/bmw-116d-04.jpg","/cars/bmw-116d-05.jpg","/cars/bmw-116d-06.jpg","/cars/bmw-116d-07.jpg","/cars/bmw-116d-08.jpg","/cars/bmw-116d-09.jpg","/cars/bmw-116d-10.jpg","/cars/bmw-116d-11.jpg","/cars/bmw-116d-12.jpg","/cars/bmw-116d-13.jpg","/cars/bmw-116d-14.jpg","/cars/bmw-116d-15.jpg","/cars/bmw-116d-16.jpg","/cars/bmw-116d-17.jpg","/cars/bmw-116d-18.jpg","/cars/bmw-116d-19.jpg","/cars/bmw-116d-20.jpg","/cars/bmw-116d-21.jpg","/cars/bmw-116d-22.jpg","/cars/bmw-116d-23.jpg","/cars/bmw-116d-24.jpg"],
+  },
+  {
+    id: "v2", brand: "Mercedes-Benz", model: "Classe A 180 AMG Pack Night", year: 2017, km: 129000, price: 18900, fuel: "Diesel", gearbox: "Automática", body: "hatch", color: "#f2f2f0", seats: 5, engine: "1.5 CDI", power: "109 cv",
+    features: [
+      "Pack desportivo AMG", "Pack Night com detalhes exteriores em preto", "Teto panorâmico", "Navegação GPS", "Caixa automática", "Jantes especiais AMG", "Faróis com assinatura luminosa Mercedes-Benz",
+      "Bancos desportivos", "Volante desportivo multifunções", "Sistema multimédia com ecrã central", "Computador de bordo", "Ar condicionado", "Comandos no volante", "Acabamentos interiores desportivos",
+      "Vidros elétricos", "Retrovisores exteriores elétricos", "Fecho centralizado",
+    ],
+    description: "Versão AMG Pack Night com presença elegante e desportiva, teto panorâmico e caixa automática. Motor diesel eficiente para o dia a dia. Excelente apresentação exterior e interior, revisão efetuada e pronto para circular. Garantia de 18 meses. Financiamento possível, aceite em até 24h, por apenas 239 €/mês. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: true, isNew: false,
+    colors: [{ name: "Branco", hex: "#f2f2f0", qty: 1 }],
+    photos: ["/cars/mercedes-a180-01.jpg","/cars/mercedes-a180-02.jpg","/cars/mercedes-a180-03.jpg","/cars/mercedes-a180-04.jpg","/cars/mercedes-a180-05.jpg","/cars/mercedes-a180-06.jpg","/cars/mercedes-a180-07.jpg","/cars/mercedes-a180-08.jpg","/cars/mercedes-a180-09.jpg","/cars/mercedes-a180-10.jpg","/cars/mercedes-a180-11.jpg","/cars/mercedes-a180-12.jpg","/cars/mercedes-a180-13.jpg","/cars/mercedes-a180-14.jpg","/cars/mercedes-a180-15.jpg","/cars/mercedes-a180-16.jpg","/cars/mercedes-a180-17.jpg","/cars/mercedes-a180-18.jpg","/cars/mercedes-a180-19.jpg","/cars/mercedes-a180-20.jpg","/cars/mercedes-a180-21.jpg","/cars/mercedes-a180-22.jpg","/cars/mercedes-a180-23.jpg","/cars/mercedes-a180-24.jpg","/cars/mercedes-a180-25.jpg","/cars/mercedes-a180-26.jpg","/cars/mercedes-a180-27.jpg","/cars/mercedes-a180-28.jpg"],
+  },
+  {
+    id: "v3", brand: "Smart", model: "Forfour 1.0", year: 2017, km: 248000, price: 7900, fuel: "Gasolina", gearbox: "Automática", body: "hatch", color: "#e8651a", seats: 4, engine: "1.0", power: "71 cv",
+    features: ["Caixa automática","Jantes de liga leve em preto","Carroçaria bicolor com acabamento desportivo","5 portas e 4 lugares","Bancos dianteiros em tecido","Volante multifunções","Computador de bordo","Rádio integrado","Comandos de climatização de fácil acesso","Direção assistida","Fecho centralizado","Vidros elétricos"],
+    description: "Design urbano com uma combinação de cores que não passa despercebida. Dimensões compactas, ideais para estacionar em espaços reduzidos e para as deslocações diárias na cidade. Excelente apresentação, revisão efetuada e pronto para circular. Possibilidade de financiamento, por apenas 129 €/mês. Garantia de 18 meses. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: false, isNew: false,
+    colors: [{ name: "Laranja e preto", hex: "#e8651a", qty: 1 }],
+    photos: ["/cars/smart-forfour-01.jpg","/cars/smart-forfour-02.jpg","/cars/smart-forfour-03.jpg","/cars/smart-forfour-04.jpg","/cars/smart-forfour-05.jpg","/cars/smart-forfour-06.jpg","/cars/smart-forfour-07.jpg","/cars/smart-forfour-08.jpg","/cars/smart-forfour-09.jpg","/cars/smart-forfour-10.jpg","/cars/smart-forfour-11.jpg"],
+  },
+  {
+    id: "v4", brand: "Mercedes-Benz", model: "Classe A AMG", year: 2015, km: 153000, price: 13900, fuel: "Gasolina", gearbox: "Manual", body: "hatch", color: "#c8321f", seats: 5, engine: "1.6", power: "122 cv",
+    features: ["Pack desportivo AMG","Jantes de liga leve de 18\"","Sensores de estacionamento","Faróis dianteiros com projetores","Luzes diurnas","Sistema multimédia com ecrã central","Computador de bordo","Ar condicionado","Volante multifunções","Bancos desportivos","Vidros elétricos","Fecho centralizado"],
+    description: "Design AMG com presença desportiva e marcante, em vermelho. Compacto e versátil para a cidade e viagens. Excelente apresentação, revisão efetuada e pronto para circular. Possibilidade de financiamento, por apenas 190 €/mês. Garantia de 18 meses. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: false, isNew: false,
+    colors: [{ name: "Vermelho", hex: "#c8321f", qty: 1 }],
+    photos: ["/cars/mercedes-a-amg-vermelho-01.jpg","/cars/mercedes-a-amg-vermelho-02.jpg","/cars/mercedes-a-amg-vermelho-03.jpg","/cars/mercedes-a-amg-vermelho-04.jpg"],
+  },
+  {
+    id: "v5", brand: "Volkswagen", model: "Golf 8 GTI Clubsport", year: 2023, km: 65000, price: 44900, fuel: "Gasolina", gearbox: "Automática", body: "hatch", color: "#b3122a", seats: 5, engine: "2.0 TSI Turbo", power: "300 cv",
+    features: ["Caixa automática DSG","Jantes especiais em preto","Faróis Full LED","Digital Cockpit","Navegação integrada","Apple CarPlay e Android Auto","Volante desportivo multifunções","Bancos desportivos","Iluminação ambiente LED multicolor","Câmara de marcha-atrás","Sensores de estacionamento","Dupla saída de escape","Pinças de travão vermelhas","Teto panorâmico","Vidros escurecidos","Spoiler traseiro","Ar condicionado automático","Modos de condução"],
+    description: "Versão GTI Clubsport com personalidade desportiva e exclusiva: motor 2.0 TSI Turbo de 300 cv, design agressivo e excelente combinação de performance, tecnologia e conforto. Excelente apresentação, revisão efetuada e pronto para circular. Possibilidade de financiamento, por apenas 449 €/mês. Garantia de 18 meses. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: true, isNew: false,
+    colors: [{ name: "Vermelho", hex: "#b3122a", qty: 1 }],
+    photos: ["/cars/golf-8-gti-clubsport-01.jpg","/cars/golf-8-gti-clubsport-02.jpg","/cars/golf-8-gti-clubsport-03.jpg","/cars/golf-8-gti-clubsport-04.jpg","/cars/golf-8-gti-clubsport-05.jpg","/cars/golf-8-gti-clubsport-06.jpg","/cars/golf-8-gti-clubsport-07.jpg"],
+  },
+  {
+    id: "v6", brand: "MINI", model: "Cooper Clubman Hampton 50 Anos", year: null, km: null, price: 9900, fuel: "Diesel", gearbox: "Manual", body: "hatch", color: "#2b3550", seats: 5, engine: "2.0 Diesel Stage 1", power: "143 cv (≈180 cv)",
+    features: ["Versão especial Hampton 50 Anos","Bancos em pele","Som premium Harman Kardon","Navegação GPS","Duplo teto panorâmico","Faróis Xenon","Sensores de estacionamento traseiros","Luzes de nevoeiro","Vidros escurecidos","Modo de condução Sport","Dupla saída de escape","Apoio de braço dianteiro","Volante multifunções","Computador de bordo","Acabamentos interiores exclusivos Hampton"],
+    description: "Edição especial Hampton, criada para celebrar os 50 anos da MINI. Motor 2.0 Diesel com Stage 1, atingindo aproximadamente 180 cv. Duplo teto panorâmico e som Harman Kardon. Excelente apresentação exterior e interior, revisão efetuada e pronto para circular. Financiamento aceite em até 24h, por aproximadamente 150 €/mês. Garantia de 18 meses. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: false, isNew: false,
+    colors: [{ name: "Azul escuro", hex: "#2b3550", qty: 1 }],
+    photos: ["/cars/mini-clubman-hampton-01.jpg","/cars/mini-clubman-hampton-02.jpg","/cars/mini-clubman-hampton-03.jpg","/cars/mini-clubman-hampton-04.jpg","/cars/mini-clubman-hampton-05.jpg","/cars/mini-clubman-hampton-06.jpg","/cars/mini-clubman-hampton-07.jpg","/cars/mini-clubman-hampton-08.jpg","/cars/mini-clubman-hampton-09.jpg","/cars/mini-clubman-hampton-10.jpg","/cars/mini-clubman-hampton-11.jpg","/cars/mini-clubman-hampton-12.jpg","/cars/mini-clubman-hampton-13.jpg","/cars/mini-clubman-hampton-14.jpg","/cars/mini-clubman-hampton-15.jpg","/cars/mini-clubman-hampton-16.jpg","/cars/mini-clubman-hampton-17.jpg","/cars/mini-clubman-hampton-18.jpg","/cars/mini-clubman-hampton-19.jpg"],
+  },
 ];
 
-export const seedRentals: RentalCar[] = [
-  { id: "r1", brand: "Kia", model: "Picanto", year: 2023, category: "Económico", pricePerDay: 28000, fuel: "Gasolina", gearbox: "Manual", body: "hatch", color: "#e8c547", seats: 5, bags: 2, features: ["Ar condicionado", "Bluetooth", "Baixo consumo"], colors: [{ name: "Amarelo", hex: "#e8c547", qty: 1 }], available: true },
-  { id: "r2", brand: "Toyota", model: "Corolla", year: 2022, category: "Compacto", pricePerDay: 42000, fuel: "Híbrido", gearbox: "Automática", body: "sedan", color: "#d9d9d6", seats: 5, bags: 3, features: ["Automática", "Câmara traseira", "Bluetooth"], colors: [{ name: "Prata", hex: "#d9d9d6", qty: 2 }], available: true },
-  { id: "r3", brand: "Hyundai", model: "Tucson", year: 2024, category: "SUV", pricePerDay: 68000, fuel: "Híbrido", gearbox: "Automática", body: "suv", color: "#6d1f2b", seats: 5, bags: 4, features: ["Automática", "Apple CarPlay", "Assistente de faixa"], colors: [{ name: "Bordeaux", hex: "#6d1f2b", qty: 3 }], available: true },
-  { id: "r4", brand: "Toyota", model: "Land Cruiser Prado", year: 2022, category: "SUV", pricePerDay: 120000, fuel: "Diesel", gearbox: "Automática", body: "suv", color: "#2f3a33", seats: 7, bags: 5, features: ["4x4", "7 lugares", "Bancos em pele", "Ideal para o interior"], colors: [{ name: "Verde escuro", hex: "#2f3a33", qty: 1 }], available: true },
-  { id: "r5", brand: "Mercedes-Benz", model: "Classe E", year: 2022, category: "Executivo", pricePerDay: 150000, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#1b1f24", seats: 5, bags: 3, features: ["Motorista disponível", "Bancos em pele", "Wi-Fi a bordo"], colors: [{ name: "Preto", hex: "#1b1f24", qty: 2 }], available: true },
-  { id: "r6", brand: "Toyota", model: "Hilux 4x4", year: 2023, category: "Pickup", pricePerDay: 85000, fuel: "Diesel", gearbox: "Manual", body: "pickup", color: "#b9b6ad", seats: 5, bags: 6, features: ["Cabine dupla", "4x4", "Ideal para obras e campo"], colors: [{ name: "Cinzento", hex: "#b9b6ad", qty: 0 }], available: false },
-  { id: "r7", brand: "Toyota", model: "HiAce", year: 2021, category: "Minibus", pricePerDay: 98000, fuel: "Diesel", gearbox: "Manual", body: "van", color: "#e9e7e1", seats: 14, bags: 8, features: ["14 lugares", "Ar condicionado", "Transporte de grupos"], colors: [{ name: "Branco", hex: "#e9e7e1", qty: 1 }], available: true },
-  { id: "r8", brand: "Nissan", model: "Qashqai", year: 2022, category: "SUV", pricePerDay: 55000, fuel: "Gasolina", gearbox: "Automática", body: "suv", color: "#5d7a9a", seats: 5, bags: 4, features: ["Automática", "Câmara 360°", "Apple CarPlay"], colors: [{ name: "Azul", hex: "#5d7a9a", qty: 2 }], available: true },
-];
+export const seedRentals: RentalCar[] = [];
 
 export const rentalExtras = [
-  { id: "driver", label: "Motorista profissional", price: 25000, per: "dia" },
-  { id: "insurance", label: "Seguro de danos completo", price: 8000, per: "dia" },
-  { id: "gps", label: "GPS / navegação", price: 3000, per: "dia" },
-  { id: "seat", label: "Cadeira de bebé", price: 2500, per: "dia" },
-  { id: "airport", label: "Entrega no aeroporto", price: 15000, per: "único" },
+  { id: "driver", label: "Motorista profissional", price: 60, per: "dia" },
+  { id: "insurance", label: "Seguro de danos completo", price: 15, per: "dia" },
+  { id: "gps", label: "GPS / navegação", price: 5, per: "dia" },
+  { id: "seat", label: "Cadeira de bebé", price: 5, per: "dia" },
+  { id: "airport", label: "Entrega no aeroporto", price: 25, per: "único" },
 ] as const;

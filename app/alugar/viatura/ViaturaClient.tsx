@@ -3,10 +3,10 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useRentals } from "@/lib/store";
-import { CarImage, ColorList } from "@/components/CarImage";
+import { Gallery, ColorList } from "@/components/CarImage";
 import { LeadForm } from "@/components/LeadForm";
 import { rentalExtras } from "@/lib/data";
-import { kz } from "@/lib/format";
+import { eur } from "@/lib/format";
 import { wa } from "@/lib/site";
 import { addDays, daysBetween, useToday } from "@/lib/useToday";
 
@@ -50,7 +50,7 @@ export function ViaturaClient() {
     `Viatura: ${r.brand} ${r.model} ${r.year}`,
     `Período: ${fmtDate(from)} a ${fmtDate(to)} (${days} ${days === 1 ? "dia" : "dias"})`,
     lines.items.length ? `Extras: ${lines.items.map((i) => i.label).join(", ")}` : "",
-    `Total estimado: ${kz(lines.total)}`,
+    `Total estimado: ${eur(lines.total)}`,
   ].filter(Boolean).join("\n");
 
   return (
@@ -61,11 +61,11 @@ export function ViaturaClient() {
 
       <div className="detail">
         <div>
-          <div className="stage"><CarImage photo={r.photo} body={r.body} color={r.color} label={`${r.brand} ${r.model}`} /></div>
+          <Gallery photos={r.photos} body={r.body} color={r.color} label={`${r.brand} ${r.model}`} />
           <div style={{ marginTop: 28 }}>
             <span className={`plate${r.available ? "" : " is-off"}`}>{r.available ? r.category : "Indisponível de momento"}</span>
             <h1 className="h2" style={{ marginTop: 10 }}>{r.brand} {r.model}</h1>
-            <p className="lead muted" style={{ marginTop: 10 }}>{kz(r.pricePerDay)} por dia</p>
+            <p className="lead muted" style={{ marginTop: 10 }}>{eur(r.pricePerDay)} por dia</p>
             <ColorList colors={r.colors} unit="disponíveis" />
           </div>
           <dl className="spec-table" style={{ marginTop: 24 }}>
@@ -99,16 +99,16 @@ export function ViaturaClient() {
                   <label key={e.id} className="check">
                     <input type="checkbox" checked={extras.includes(e.id)} onChange={() => setExtras((x) => (x.includes(e.id) ? x.filter((i) => i !== e.id) : [...x, e.id]))} />
                     <span style={{ flex: 1 }}>{e.label}</span>
-                    <span className="muted">{kz(e.price)}/{e.per}</span>
+                    <span className="muted">{eur(e.price)}/{e.per}</span>
                   </label>
                 ))}
               </fieldset>
             </div>
 
             <div style={{ marginTop: 14 }} aria-live="polite">
-              <div className="row"><span>{kz(r.pricePerDay)} × {days} {days === 1 ? "dia" : "dias"}</span><span>{kz(lines.base)}</span></div>
-              {lines.items.map((i) => (<div className="row" key={i.label}><span>{i.label}</span><span>{kz(i.value)}</span></div>))}
-              <div className="total"><span>Total estimado</span><strong>{kz(lines.total)}</strong></div>
+              <div className="row"><span>{eur(r.pricePerDay)} × {days} {days === 1 ? "dia" : "dias"}</span><span>{eur(lines.base)}</span></div>
+              {lines.items.map((i) => (<div className="row" key={i.label}><span>{i.label}</span><span>{eur(i.value)}</span></div>))}
+              <div className="total"><span>Total estimado</span><strong>{eur(lines.total)}</strong></div>
             </div>
             <p className="hint">Estimativa sem caução. O valor final é confirmado por nós.</p>
 

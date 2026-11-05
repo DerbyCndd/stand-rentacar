@@ -1,4 +1,6 @@
-export const kz = (n: number) => `${Math.round(n).toLocaleString("pt-PT")} Kz`;
+const EUR = new Intl.NumberFormat("pt-PT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 });
+export const eur = (n: number) => EUR.format(Math.round(n));
+export const kmLabel = (n: number | null) => (n === null ? "A confirmar" : n === 0 ? "0 km" : km(n));
 export const km = (n: number) => `${n.toLocaleString("pt-PT")} km`;
 export const uid = () => Math.random().toString(36).slice(2, 9) + Date.now().toString(36).slice(-3);
 

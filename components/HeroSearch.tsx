@@ -88,9 +88,9 @@ export function HeroSearch() {
               <label htmlFor={`${id}p`}>Preço máximo</label>
               <select id={`${id}p`} className="select" value={max} onChange={(e) => setMax(e.target.value)}>
                 <option value="">Sem limite</option>
-                <option value="20000000">até 20 milhões Kz</option>
-                <option value="40000000">até 40 milhões Kz</option>
-                <option value="60000000">até 60 milhões Kz</option>
+                <option value="10000">até 10 000 €</option>
+                <option value="20000">até 20 000 €</option>
+                <option value="30000">até 30 000 €</option>
               </select>
             </div>
           </>

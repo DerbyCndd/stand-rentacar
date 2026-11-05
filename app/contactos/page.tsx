@@ -4,7 +4,7 @@ import { site, wa } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contactos",
-  description: "Fale connosco por WhatsApp, telefone ou visite o stand em Luanda. Marque uma visita ou peça uma proposta.",
+  description: "Fale connosco por WhatsApp, telefone ou visite o stand em Braga. Marque uma visita ou peça uma proposta.",
 };
 
 export default function Page() {
