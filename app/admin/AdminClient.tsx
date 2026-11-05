@@ -3,21 +3,23 @@ import { useState } from "react";
 import { useAdminSession, useLeads, useRentals, useVehicles } from "@/lib/store";
 import { site } from "@/lib/site";
 import { kz, uid } from "@/lib/format";
-import type { Body, Fuel, Gearbox, RentalCar, RentCategory, Vehicle } from "@/lib/types";
+import type { Body, ColorStock, Fuel, Gearbox, RentalCar, RentCategory, Vehicle } from "@/lib/types";
+import { fileToPhoto, totalQty } from "@/lib/stock";
+import { CarImage } from "@/components/CarImage";
 
 const BODIES: [Body, string][] = [["sedan", "Berlina"], ["suv", "SUV / 4x4"], ["hatch", "Citadino"], ["pickup", "Pick-up"], ["van", "Carrinha / Minibus"]];
 const FUELS: Fuel[] = ["Gasolina", "Diesel", "Híbrido", "Elétrico"];
 const GEARS: Gearbox[] = ["Manual", "Automática"];
 const CATS: RentCategory[] = ["Económico", "Compacto", "SUV", "Executivo", "Pickup", "Minibus"];
 
-const blankVehicle = (): Vehicle => ({ id: "", brand: "", model: "", year: new Date().getFullYear(), km: 0, price: 0, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#2f3a33", seats: 5, engine: "", power: "", features: [], description: "", status: "disponivel", featured: false, isNew: false });
-const blankRental = (): RentalCar => ({ id: "", brand: "", model: "", year: new Date().getFullYear(), category: "Compacto", pricePerDay: 0, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#2f3a33", seats: 5, bags: 2, features: [], available: true });
+const blankVehicle = (): Vehicle => ({ id: "", brand: "", model: "", year: new Date().getFullYear(), km: 0, price: 0, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#2f3a33", seats: 5, engine: "", power: "", features: [], description: "", status: "disponivel", featured: false, isNew: false, colors: [] });
+const blankRental = (): RentalCar => ({ id: "", brand: "", model: "", year: new Date().getFullYear(), category: "Compacto", pricePerDay: 0, fuel: "Gasolina", gearbox: "Automática", body: "sedan", color: "#2f3a33", seats: 5, bags: 2, features: [], available: true, colors: [] });
 
 export function AdminClient() {
   const { state, login, logout } = useAdminSession();
   const [pw, setPw] = useState("");
   const [bad, setBad] = useState(false);
-  const [tab, setTab] = useState<"leads" | "vehicles" | "rentals">("leads");
+  const [tab, setTab] = useState<"leads" | "stock" | "vehicles" | "rentals">("leads");
 
   if (state === "unknown") return null;
 
@@ -60,12 +62,13 @@ export function AdminClient() {
       </p>
 
       <div className="admin-tabs" role="tablist" aria-label="Secções">
-        {([["leads", "Pedidos"], ["vehicles", "Viaturas à venda"], ["rentals", "Frota de aluguer"]] as const).map(([k, l]) => (
+        {([["leads", "Pedidos"], ["stock", "Stock e cores"], ["vehicles", "Viaturas à venda"], ["rentals", "Frota de aluguer"]] as const).map(([k, l]) => (
           <button key={k} role="tab" aria-selected={tab === k} onClick={() => setTab(k)}>{l}</button>
         ))}
       </div>
 
       {tab === "leads" && <Leads />}
+      {tab === "stock" && <StockOverview />}
       {tab === "vehicles" && <VehiclesAdmin />}
       {tab === "rentals" && <RentalsAdmin />}
     </div>
@@ -168,6 +171,8 @@ function VehiclesAdmin() {
           <Pick id="vst" label="Estado" value={f.status} options={[["disponivel", "Disponível"], ["reservado", "Reservado"], ["vendido", "Vendido"]]} onChange={(v) => set("status", v)} />
           <div className="full field"><label htmlFor="vfe">Equipamento (separado por vírgulas)</label><input id="vfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Câmara 360°, Bancos em pele" /></div>
           <div className="full field"><label htmlFor="vd">Descrição</label><textarea id="vd" className="textarea" value={f.description} onChange={(e) => set("description", e.target.value)} /></div>
+          <div className="full"><PhotoField photo={f.photo} onChange={(p) => set("photo", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} /></div>
           <label className="check"><input type="checkbox" checked={f.featured} onChange={(e) => set("featured", e.target.checked)} /> Destaque na página inicial</label>
           <label className="check"><input type="checkbox" checked={f.isNew} onChange={(e) => set("isNew", e.target.checked)} /> Viatura nova</label>
         </div>
@@ -182,12 +187,13 @@ function VehiclesAdmin() {
           <button className="btn btn-ghost on-paper btn-sm" onClick={() => { if (confirm("Repor os dados de exemplo? As suas alterações a viaturas serão perdidas.")) reset(); }}>Repor exemplos</button></div>
         <div className="table-wrap">
           <table>
-            <thead><tr><th>Viatura</th><th>Preço</th><th>Estado</th><th><span className="sr">Ações</span></th></tr></thead>
+            <thead><tr><th>Viatura</th><th>Preço</th><th>Unidades / cores</th><th>Estado</th><th><span className="sr">Ações</span></th></tr></thead>
             <tbody>
               {list.map((v) => (
                 <tr key={v.id}>
                   <td><strong>{v.brand} {v.model}</strong><br /><span className="muted">{v.year} · {v.fuel}</span></td>
                   <td>{kz(v.price)}</td>
+                  <td><Dots colors={v.colors} /></td>
                   <td>
                     <span className={`badge${v.status === "disponivel" ? "" : v.status === "reservado" ? " warn" : " off"}`}>{v.status === "disponivel" ? "Disponível" : v.status === "reservado" ? "Reservado" : "Vendido"}</span>
                     {v.featured && <> <span className="badge warn">Destaque</span></>}
@@ -242,6 +248,8 @@ function RentalsAdmin() {
           <Text id="rs" label="Lugares" type="number" value={f.seats} onChange={(v) => set("seats", +v)} min={1} max={20} />
           <Text id="rbags" label="Malas" type="number" value={f.bags} onChange={(v) => set("bags", +v)} min={0} max={20} />
           <div className="full field"><label htmlFor="rfe">Incluído (separado por vírgulas)</label><input id="rfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Ar condicionado, Bluetooth" /></div>
+          <div className="full"><PhotoField photo={f.photo} onChange={(p) => set("photo", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} unit="disponíveis" /></div>
           <label className="check full"><input type="checkbox" checked={f.available} onChange={(e) => set("available", e.target.checked)} /> Disponível para aluguer</label>
         </div>
         <div className="actions" style={{ marginTop: 16 }}>
@@ -255,12 +263,13 @@ function RentalsAdmin() {
           <button className="btn btn-ghost on-paper btn-sm" onClick={() => { if (confirm("Repor os dados de exemplo da frota?")) reset(); }}>Repor exemplos</button></div>
         <div className="table-wrap">
           <table>
-            <thead><tr><th>Viatura</th><th>Preço/dia</th><th>Estado</th><th><span className="sr">Ações</span></th></tr></thead>
+            <thead><tr><th>Viatura</th><th>Preço/dia</th><th>Unidades / cores</th><th>Estado</th><th><span className="sr">Ações</span></th></tr></thead>
             <tbody>
               {list.map((r) => (
                 <tr key={r.id}>
                   <td><strong>{r.brand} {r.model}</strong><br /><span className="muted">{r.category} · {r.seats} lugares</span></td>
                   <td>{kz(r.pricePerDay)}</td>
+                  <td><Dots colors={r.colors} /></td>
                   <td><span className={`badge${r.available ? "" : " off"}`}>{r.available ? "Disponível" : "Indisponível"}</span></td>
                   <td>
                     <div className="actions">
@@ -276,5 +285,112 @@ function RentalsAdmin() {
         </div>
       </div>
     </div>
+  );
+}
+
+/* ───────── Fotografia e cores ───────── */
+function Dots({ colors }: { colors?: ColorStock[] }) {
+  const list = colors ?? [];
+  if (list.length === 0) return <span className="muted">Sem cores</span>;
+  return (
+    <>
+      <strong>{totalQty(list)}</strong> un.
+      <ul className="color-list" style={{ marginTop: 6 }}>
+        {list.map((c, i) => (
+          <li key={i} className={c.qty > 0 ? "" : "out"}><span className="dot" style={{ background: c.hex }} aria-hidden="true" />{c.name || c.hex}: {c.qty}</li>
+        ))}
+      </ul>
+    </>
+  );
+}
+
+function PhotoField({ photo, onChange, body, color, label }: { photo?: string; onChange: (p: string | undefined) => void; body: Body; color: string; label: string }) {
+  const [err, setErr] = useState("");
+  return (
+    <div className="photo-edit">
+      <div className="field">
+        <label htmlFor="photo-file">Fotografia real</label>
+        <input
+          id="photo-file"
+          className="input"
+          type="file"
+          accept="image/*"
+          onChange={async (e) => {
+            const file = e.target.files?.[0];
+            e.target.value = "";
+            if (!file) return;
+            try {
+              setErr("");
+              onChange(await fileToPhoto(file));
+            } catch (x) {
+              setErr(x instanceof Error ? x.message : "Não foi possível ler a imagem.");
+            }
+          }}
+        />
+        {err && <span className="err" role="alert">{err}</span>}
+        <span className="hint">A imagem é reduzida automaticamente. Sem fotografia, o site mostra a ilustração.</span>
+      </div>
+      <CarImage photo={photo} body={body} color={color} label={label} />
+      {photo && <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={() => onChange(undefined)}>Remover fotografia</button>}
+    </div>
+  );
+}
+
+function ColorsField({ colors, onChange, unit = "em stock" }: { colors: ColorStock[]; onChange: (c: ColorStock[]) => void; unit?: string }) {
+  const upd = (i: number, patch: Partial<ColorStock>) => onChange(colors.map((c, j) => (j === i ? { ...c, ...patch } : c)));
+  return (
+    <fieldset style={{ border: 0, padding: 0, margin: 0 }}>
+      <legend style={{ fontWeight: 700, marginBottom: 8 }}>Cores e unidades {unit}</legend>
+      {colors.map((c, i) => (
+        <div className="color-row" key={i}>
+          <input className="input" type="color" aria-label={`Cor ${i + 1}`} value={c.hex} onChange={(e) => upd(i, { hex: e.target.value })} style={{ padding: 2 }} />
+          <input className="input" aria-label={`Nome da cor ${i + 1}`} placeholder="Nome (ex.: Preto)" value={c.name} onChange={(e) => upd(i, { name: e.target.value })} />
+          <input className="input" type="number" min={0} aria-label={`Unidades da cor ${i + 1}`} value={c.qty} onChange={(e) => upd(i, { qty: Math.max(0, Math.floor(+e.target.value) || 0) })} />
+          <button type="button" className="btn btn-danger btn-sm" onClick={() => onChange(colors.filter((_, j) => j !== i))}>Remover</button>
+        </div>
+      ))}
+      <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={() => onChange([...colors, { name: "", hex: "#1b1f24", qty: 1 }])}>+ Adicionar cor</button>
+      <p className="hint" style={{ marginTop: 6 }}>Total: <strong>{totalQty(colors)}</strong> unidades. Com 0 unidades a cor aparece como esgotada.</p>
+    </fieldset>
+  );
+}
+
+/* ───────── Visão geral do stock ───────── */
+function StockOverview() {
+  const { list: vehicles } = useVehicles();
+  const { list: rentals } = useRentals();
+  const saleUnits = vehicles.filter((v) => v.status !== "vendido").reduce((n, v) => n + totalQty(v.colors), 0);
+  const rentUnits = rentals.reduce((n, r) => n + totalQty(r.colors), 0);
+  const rentFree = rentals.filter((r) => r.available).length;
+  const rows = [
+    ...vehicles.map((v) => ({ key: "v" + v.id, kind: "Venda", name: `${v.brand} ${v.model}`, ok: v.status === "disponivel", label: v.status === "disponivel" ? "Disponível" : v.status === "reservado" ? "Reservado" : "Vendido", colors: v.colors })),
+    ...rentals.map((r) => ({ key: "r" + r.id, kind: "Aluguer", name: `${r.brand} ${r.model}`, ok: r.available, label: r.available ? "Disponível" : "Indisponível", colors: r.colors })),
+  ];
+  return (
+    <>
+      <div className="stat-row">
+        <div className="stat"><b>{vehicles.length}</b>Modelos à venda</div>
+        <div className="stat"><b>{saleUnits}</b>Unidades à venda</div>
+        <div className="stat"><b>{rentals.length}</b>Modelos na frota ({rentFree} livres)</div>
+        <div className="stat"><b>{rentUnits}</b>Unidades de aluguer</div>
+      </div>
+      <div className="table-wrap">
+        <table>
+          <thead><tr><th>Viatura</th><th>Tipo</th><th>Estado</th><th>Unidades</th><th>Cores</th></tr></thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr key={r.key}>
+                <td><strong>{r.name}</strong></td>
+                <td>{r.kind}</td>
+                <td><span className={`badge${r.ok ? "" : " off"}`}>{r.label}</span></td>
+                <td>{totalQty(r.colors)}</td>
+                <td><Dots colors={r.colors} /></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p className="hint" style={{ marginTop: 10 }}>Para alterar fotografias, cores e unidades, edite a viatura nos separadores “Viaturas à venda” ou “Frota de aluguer”.</p>
+    </>
   );
 }

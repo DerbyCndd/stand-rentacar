@@ -3,7 +3,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useMemo, useState } from "react";
 import { useRentals } from "@/lib/store";
-import { CarArt } from "@/components/CarArt";
+import { CarImage, ColorList } from "@/components/CarImage";
 import { LeadForm } from "@/components/LeadForm";
 import { rentalExtras } from "@/lib/data";
 import { kz } from "@/lib/format";
@@ -61,11 +61,12 @@ export function ViaturaClient() {
 
       <div className="detail">
         <div>
-          <div className="stage"><CarArt body={r.body} color={r.color} label={`${r.brand} ${r.model}`} /></div>
+          <div className="stage"><CarImage photo={r.photo} body={r.body} color={r.color} label={`${r.brand} ${r.model}`} /></div>
           <div style={{ marginTop: 28 }}>
             <span className={`plate${r.available ? "" : " is-off"}`}>{r.available ? r.category : "Indisponível de momento"}</span>
             <h1 className="h2" style={{ marginTop: 10 }}>{r.brand} {r.model}</h1>
             <p className="lead muted" style={{ marginTop: 10 }}>{kz(r.pricePerDay)} por dia</p>
+            <ColorList colors={r.colors} unit="disponíveis" />
           </div>
           <dl className="spec-table" style={{ marginTop: 24 }}>
             {[["Ano", r.year], ["Lugares", r.seats], ["Malas", r.bags], ["Caixa", r.gearbox], ["Combustível", r.fuel]].map(([k, v]) => (

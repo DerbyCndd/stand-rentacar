@@ -267,3 +267,16 @@ tr:last-child td { border-bottom: 0; }
 /* Evita overflow horizontal em ecrãs pequenos (filhos de grid podem ter largura mínima maior que a coluna) */
 .detail > *, .split > *, .band > *, .listing > *, .admin-grid > *, .hero-grid > *, .form-grid > *, .field { min-width: 0; }
 .input[type="date"] { min-width: 0; }
+
+/* Fotografias reais e cores em stock */
+.car-photo { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; border-radius: 6px; }
+.vcard-art:has(.car-photo) { padding: 0; }
+.stage:has(.car-photo) { padding: 0; overflow: hidden; }
+.color-list { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; list-style: none; padding: 0; }
+.color-list li { display: inline-flex; align-items: center; gap: 8px; padding: 4px 12px; border: 1px solid var(--line-paper); border-radius: 999px; font-size: .85rem; font-weight: 600; }
+.color-list li.out { opacity: .55; text-decoration: line-through; }
+.color-list .dot { width: 14px; height: 14px; border-radius: 50%; border: 1px solid rgba(0,0,0,.25); }
+.photo-edit { display: grid; gap: 10px; }
+.photo-edit img { width: 100%; max-height: 180px; object-fit: cover; border-radius: 6px; border: 1px solid var(--line-paper); }
+.color-row { display: grid; grid-template-columns: 44px 1fr 84px auto; gap: 8px; align-items: center; margin-bottom: 8px; }
+.color-row .input { min-width: 0; }

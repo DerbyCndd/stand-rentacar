@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useVehicles } from "@/lib/store";
-import { CarArt } from "@/components/CarArt";
+import { CarImage, ColorList } from "@/components/CarImage";
 import { FinanceSim } from "@/components/FinanceSim";
 import { LeadForm } from "@/components/LeadForm";
 import { VehicleCard } from "@/components/Cards";
@@ -38,7 +38,7 @@ export function VeiculoClient() {
       <div className="detail">
         <div>
           <div className="stage">
-            <CarArt body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
+            <CarImage photo={v.photo} body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
           </div>
 
           <div style={{ marginTop: 28 }}>
@@ -50,6 +50,7 @@ export function VeiculoClient() {
             </div>
             <h1 className="h2" style={{ marginTop: 10 }}>{v.model} · {v.year}</h1>
             <p className="lead muted" style={{ marginTop: 12 }}>{v.description}</p>
+            <ColorList colors={v.colors} />
           </div>
 
           <dl className="spec-table" style={{ marginTop: 28 }}>
