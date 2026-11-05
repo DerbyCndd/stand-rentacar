@@ -27,7 +27,7 @@ export function ComprarClient() {
   const [simPrice, setSimPrice] = useState(10000);
 
   const brands = useMemo(() => [...new Set(list.map((v) => v.brand))].sort(), [list]);
-  const top = Math.max(...list.map((v) => v.price), 5000);
+  const top = Math.max(...list.map((v) => v.price ?? 0), 5000);
 
   const shown = useMemo(() => {
     const s = q.trim().toLowerCase();
@@ -38,12 +38,12 @@ export function ComprarClient() {
         (!body || v.body === body) &&
         (!fuel || v.fuel === fuel) &&
         (!gear || v.gearbox === gear) &&
-        (!max || v.price <= max),
+        (!max || (v.price !== null && v.price <= max)),
     );
     const order: Record<string, (a: (typeof r)[0], b: (typeof r)[0]) => number> = {
       rec: (a, b) => Number(b.featured) - Number(a.featured) || (b.year ?? 0) - (a.year ?? 0),
-      pa: (a, b) => a.price - b.price,
-      pd: (a, b) => b.price - a.price,
+      pa: (a, b) => (a.price ?? 1e9) - (b.price ?? 1e9),
+      pd: (a, b) => (b.price ?? 0) - (a.price ?? 0),
       yd: (a, b) => (b.year ?? 0) - (a.year ?? 0),
       ka: (a, b) => (a.km ?? 1e9) - (b.km ?? 1e9),
     };

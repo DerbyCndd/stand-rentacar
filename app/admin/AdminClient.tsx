@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { useAdminSession, useLeads, useRentals, useVehicles } from "@/lib/store";
 import { site } from "@/lib/site";
-import { eur, uid } from "@/lib/format";
+import { eur, priceLabel, uid } from "@/lib/format";
 import type { Body, ColorStock, Fuel, Gearbox, RentalCar, RentCategory, Vehicle } from "@/lib/types";
 import { fileToPhoto, totalQty } from "@/lib/stock";
 import { CarImage } from "@/components/CarImage";
@@ -160,8 +160,8 @@ function VehiclesAdmin() {
           <Text id="vm" label="Modelo" required value={f.model} onChange={(v) => set("model", v)} />
           <Text id="vy" label="Ano" type="number" value={f.year ?? ""} onChange={(v) => set("year", v === "" ? null : +v)} min={1990} max={2100} />
           <Text id="vk" label="Quilómetros" type="number" value={f.km ?? ""} onChange={(v) => set("km", v === "" ? null : +v)} min={0} />
-          <div className="full"><Text id="vp" label="Preço (€)" type="number" required value={f.price} onChange={(v) => set("price", +v)} min={0} /></div>
-          <Pick id="vf" label="Combustível" value={f.fuel} options={FUELS} onChange={(v) => set("fuel", v)} />
+          <div className="full"><Text id="vp" label="Preço (€) · vazio = sob consulta" type="number" value={f.price ?? ""} onChange={(v) => set("price", v === "" ? null : +v)} min={0} /></div>
+          <Pick id="vf" label="Combustível" value={f.fuel ?? ""} options={[["", "A confirmar"], ...FUELS.map((x) => [x, x] as [Fuel, string])]} onChange={(v) => set("fuel", v === "" ? null : v)} />
           <Pick id="vg" label="Caixa" value={f.gearbox} options={GEARS} onChange={(v) => set("gearbox", v)} />
           <Pick id="vbody" label="Carroçaria" value={f.body} options={BODIES} onChange={(v) => set("body", v)} />
           <div className="field"><label htmlFor="vc">Cor principal</label><input id="vc" className="input" type="color" value={f.color} onChange={(e) => set("color", e.target.value)} style={{ padding: 4 }} /></div>
@@ -191,8 +191,8 @@ function VehiclesAdmin() {
             <tbody>
               {list.map((v) => (
                 <tr key={v.id}>
-                  <td><strong>{v.brand} {v.model}</strong><br /><span className="muted">{v.year ?? "Ano a confirmar"} · {v.fuel}</span></td>
-                  <td>{eur(v.price)}</td>
+                  <td><strong>{v.brand} {v.model}</strong><br /><span className="muted">{v.year ?? "Ano a confirmar"} · {v.fuel ?? "Combustível a confirmar"}</span></td>
+                  <td>{priceLabel(v.price)}</td>
                   <td><Dots colors={v.colors} /></td>
                   <td>
                     <span className={`badge${v.status === "disponivel" ? "" : v.status === "reservado" ? " warn" : " off"}`}>{v.status === "disponivel" ? "Disponível" : v.status === "reservado" ? "Reservado" : "Vendido"}</span>

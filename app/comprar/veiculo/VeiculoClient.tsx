@@ -6,7 +6,7 @@ import { Gallery, ColorList } from "@/components/CarImage";
 import { FinanceSim } from "@/components/FinanceSim";
 import { LeadForm } from "@/components/LeadForm";
 import { VehicleCard } from "@/components/Cards";
-import { kmLabel, eur } from "@/lib/format";
+import { kmLabel, eur, priceLabel } from "@/lib/format";
 import { wa } from "@/lib/site";
 
 export function VeiculoClient() {
@@ -27,7 +27,7 @@ export function VeiculoClient() {
     );
 
   const related = list.filter((x) => x.id !== v.id && x.status !== "vendido" && (x.body === v.body || x.brand === v.brand)).slice(0, 3);
-  const msg = `Olá! Tenho interesse no ${v.brand} ${v.model}${v.year ? ` ${v.year}` : ""} (${eur(v.price)}).`;
+  const msg = `Olá! Tenho interesse no ${v.brand} ${v.model}${v.year ? ` ${v.year}` : ""} ${v.price === null ? "" : ` (${eur(v.price)})`}.`;
 
   return (
     <div className="wrap section" style={{ paddingBlock: "var(--space-6) var(--space-8)" }}>
@@ -53,7 +53,7 @@ export function VeiculoClient() {
 
           <dl className="spec-table" style={{ marginTop: 28 }}>
             {[
-              ["Ano", v.year ?? "A confirmar"], ["Quilometragem", kmLabel(v.km)], ["Combustível", v.fuel], ["Caixa", v.gearbox],
+              ["Ano", v.year ?? "A confirmar"], ["Quilometragem", kmLabel(v.km)], ["Combustível", v.fuel ?? "A confirmar"], ["Caixa", v.gearbox],
               ["Motor", v.engine], ["Potência", v.power], ["Lugares", v.seats],
             ].map(([k, val]) => (
               <div key={k as string}><dt>{k}</dt><dd>{val}</dd></div>
@@ -69,7 +69,7 @@ export function VeiculoClient() {
         <aside className="sticky-side">
           <div className="panel">
             <p className="muted">Preço</p>
-            <p className="price" style={{ fontSize: "2.4rem" }}>{eur(v.price)}</p>
+            <p className="price" style={{ fontSize: "2.4rem" }}>{priceLabel(v.price)}</p>
             {v.status === "disponivel" ? (
               <a className="btn btn-wa" style={{ width: "100%", marginTop: 16 }} href={wa(msg)} target="_blank" rel="noopener noreferrer">Perguntar por WhatsApp</a>
             ) : (
@@ -80,7 +80,7 @@ export function VeiculoClient() {
             <h2 className="h3" style={{ marginBottom: 14 }}>Marcar visita / test drive</h2>
             <LeadForm kind="Visita" subject={`Quero marcar visita para ver o ${v.brand} ${v.model}${v.year ? ` ${v.year}` : ""}`} presetMessage="Quando posso ver a viatura?" cta="Pedir visita" />
           </div>
-          <div className="panel"><FinanceSim price={v.price} /></div>
+          {v.price !== null && <div className="panel"><FinanceSim price={v.price} /></div>}
         </aside>
       </div>
 

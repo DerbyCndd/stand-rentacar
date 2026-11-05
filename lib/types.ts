@@ -16,8 +16,10 @@ export interface Vehicle {
   /** null = a confirmar */
   year: number | null;
   km: number | null;
-  price: number;
-  fuel: Fuel;
+  /** null = preço sob consulta */
+  price: number | null;
+  /** null = a confirmar */
+  fuel: Fuel | null;
   gearbox: Gearbox;
   body: Body;
   color: string;

@@ -64,6 +64,14 @@ export const seedVehicles: Vehicle[] = [
     colors: [{ name: "Preto", hex: "#0c0c0e", qty: 1 }],
     photos: ["/cars/audi-a3-limousine-01.jpg","/cars/audi-a3-limousine-02.jpg","/cars/audi-a3-limousine-03.jpg","/cars/audi-a3-limousine-04.jpg","/cars/audi-a3-limousine-05.jpg","/cars/audi-a3-limousine-06.jpg","/cars/audi-a3-limousine-07.jpg","/cars/audi-a3-limousine-08.jpg","/cars/audi-a3-limousine-09.jpg"],
   },
+  {
+    id: "v8", brand: "Fiat", model: "Punto", year: null, km: null, price: null, fuel: null, gearbox: "Manual", body: "hatch", color: "#5b5d63", seats: 5, engine: "A confirmar", power: "A confirmar",
+    features: ["5 portas", "Caixa manual", "Bancos em tecido"],
+    description: "Fiat Punto de 5 portas em cinzento, com caixa manual e interior em tecido. Preço sob consulta: contacte-nos para saber o valor, o ano, os quilómetros e as condições de financiamento. Garantia de 18 meses e aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: false, isNew: false,
+    colors: [{ name: "Cinzento", hex: "#5b5d63", qty: 1 }],
+    photos: ["/cars/fiat-punto-01.jpg","/cars/fiat-punto-02.jpg","/cars/fiat-punto-03.jpg","/cars/fiat-punto-04.jpg","/cars/fiat-punto-05.jpg","/cars/fiat-punto-06.jpg","/cars/fiat-punto-07.jpg","/cars/fiat-punto-08.jpg","/cars/fiat-punto-09.jpg","/cars/fiat-punto-10.jpg","/cars/fiat-punto-11.jpg"],
+  },
 ];
 
 export const seedRentals: RentalCar[] = [];

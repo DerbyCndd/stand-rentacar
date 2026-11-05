@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { RentalCar, Vehicle } from "@/lib/types";
 import { CarImage } from "./CarImage";
-import { kmLabel, eur } from "@/lib/format";
+import { kmLabel, eur, priceLabel } from "@/lib/format";
 
 export function VehicleCard({ v }: { v: Vehicle }) {
   const off = v.status !== "disponivel";
@@ -21,11 +21,11 @@ export function VehicleCard({ v }: { v: Vehicle }) {
         <ul className="specs">
           <li>{v.year ?? "Ano a confirmar"}</li>
           <li>{kmLabel(v.km)}</li>
-          <li>{v.fuel}</li>
+          <li>{v.fuel ?? "Combustível a confirmar"}</li>
           <li>{v.gearbox}</li>
         </ul>
         <div className="price-row">
-          <span className="price">{eur(v.price)}</span>
+          <span className="price">{priceLabel(v.price)}</span>
           <span aria-hidden="true" className="muted">Ver →</span>
         </div>
       </div>
