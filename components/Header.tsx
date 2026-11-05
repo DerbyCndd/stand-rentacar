@@ -20,7 +20,7 @@ export function Header() {
     <header className="header">
       <div className="wrap header-in">
         <Link prefetch={false} href="/" className="logo" aria-label={`${site.name} – página inicial`} onClick={() => setOpen(false)}>
-          <i aria-hidden="true">K</i>
+          <i aria-hidden="true">A</i>
           {site.name}
         </Link>
         <nav id="menu" className={`nav${open ? " open" : ""}`} aria-label="Principal">

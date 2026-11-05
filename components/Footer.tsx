@@ -8,7 +8,7 @@ export function Footer() {
         <div className="footer-grid">
           <div>
             <Link prefetch={false} href="/" className="logo">
-              <i aria-hidden="true">K</i>
+              <i aria-hidden="true">A</i>
               {site.name}
             </Link>
             <p className="muted" style={{ marginTop: 14, maxWidth: "34ch" }}>
