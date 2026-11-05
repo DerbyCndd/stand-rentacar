@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { HeroSearch } from "@/components/HeroSearch";
+import { HeroBrands } from "@/components/HeroBrands";
 import { Featured } from "@/components/Featured";
 import { site, wa } from "@/lib/site";
 
@@ -17,7 +18,6 @@ export default function Home() {
   return (
     <>
       <section className="hero">
-        <div className="hero-road" aria-hidden="true" />
         <div className="wrap hero-grid">
           <div>
             <p className="kicker">Stand &amp; Rent a Car · Braga</p>
@@ -51,6 +51,9 @@ export default function Home() {
             </div>
             {/* eslint-enable @next/next/no-img-element */}
           </div>
+        </div>
+        <div className="wrap">
+          <HeroBrands />
         </div>
       </section>
 
