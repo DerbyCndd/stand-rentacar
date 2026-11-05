@@ -45,9 +45,9 @@ export default function Home() {
           <div className="hero-art">
             {/* eslint-disable @next/next/no-img-element */}
             <div className="hero-photos">
-              <img className="big" src={asset("/cars/golf-8-gti-clubsport-01.jpg")} alt="Volkswagen Golf 8 GTI Clubsport vermelho" />
+              <img className="big" src={asset("/hero/stand-autoferasa.jpg")} alt="Cliente a entrar num carro preto à porta do stand AutoFerasa" />
+              <img src={asset("/cars/golf-8-gti-clubsport-01.jpg")} alt="Volkswagen Golf 8 GTI Clubsport vermelho" loading="lazy" />
               <img src={asset("/cars/mercedes-a180-01.jpg")} alt="Mercedes-Benz Classe A branco" loading="lazy" />
-              <img src={asset("/cars/audi-a3-limousine-01.jpg")} alt="Audi A3 Limousine preto" loading="lazy" />
             </div>
             {/* eslint-enable @next/next/no-img-element */}
           </div>
