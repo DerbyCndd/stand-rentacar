@@ -56,6 +56,14 @@ export const seedVehicles: Vehicle[] = [
     colors: [{ name: "Azul escuro", hex: "#2b3550", qty: 1 }],
     photos: ["/cars/mini-clubman-hampton-01.jpg","/cars/mini-clubman-hampton-02.jpg","/cars/mini-clubman-hampton-03.jpg","/cars/mini-clubman-hampton-04.jpg","/cars/mini-clubman-hampton-05.jpg","/cars/mini-clubman-hampton-06.jpg","/cars/mini-clubman-hampton-07.jpg","/cars/mini-clubman-hampton-08.jpg","/cars/mini-clubman-hampton-09.jpg","/cars/mini-clubman-hampton-10.jpg","/cars/mini-clubman-hampton-11.jpg","/cars/mini-clubman-hampton-12.jpg","/cars/mini-clubman-hampton-13.jpg","/cars/mini-clubman-hampton-14.jpg","/cars/mini-clubman-hampton-15.jpg","/cars/mini-clubman-hampton-16.jpg","/cars/mini-clubman-hampton-17.jpg","/cars/mini-clubman-hampton-18.jpg","/cars/mini-clubman-hampton-19.jpg"],
   },
+  {
+    id: "v7", brand: "Audi", model: "A3 Limousine S-Line RS3 Styling", year: 2017, km: 175000, price: 19900, fuel: "Diesel", gearbox: "Manual", body: "sedan", color: "#0c0c0e", seats: 5, engine: "1.6 TDI", power: "115 cv",
+    features: ["Pack exterior S-Line","Kit RS3 Styling exterior","Lip frontal desportivo","Difusor traseiro desportivo","Quatro saídas de escape","Bancos desportivos em pele e Alcântara","Volante desportivo multifunções","Acabamentos interiores S-Line","Carroçaria Limousine"],
+    description: "Transformação exterior RS3 Styling com presença marcante: elegância executiva e personalidade desportiva, numa silhueta Limousine. Interior com ambiente premium e inspiração desportiva. Motor 1.6 TDI de 115 cv, eficiente no dia a dia. Excelente apresentação exterior e interior, revisão efetuada e pronto para circular. Garantia de 18 meses. Financiamento aceite em até 24h, por apenas 249 €/mês. Aceitamos Título de Residência e CPLP.",
+    status: "disponivel", featured: false, isNew: false,
+    colors: [{ name: "Preto", hex: "#0c0c0e", qty: 1 }],
+    photos: ["/cars/audi-a3-limousine-01.jpg","/cars/audi-a3-limousine-02.jpg","/cars/audi-a3-limousine-03.jpg","/cars/audi-a3-limousine-04.jpg","/cars/audi-a3-limousine-05.jpg","/cars/audi-a3-limousine-06.jpg","/cars/audi-a3-limousine-07.jpg","/cars/audi-a3-limousine-08.jpg","/cars/audi-a3-limousine-09.jpg"],
+  },
 ];
 
 export const seedRentals: RentalCar[] = [];

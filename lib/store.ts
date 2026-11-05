@@ -9,7 +9,7 @@ import { seedRentals, seedVehicles } from "./data";
  * (ver README): basta reimplementar este ficheiro com chamadas à API.
  */
 const KEYS = {
-  vehicles: "autoferasa.vehicles.v4",
+  vehicles: "autoferasa.vehicles.v5",
   rentals: "autoferasa.rentals.v2",
   leads: "autoferasa.leads.v1",
 } as const;
