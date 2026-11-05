@@ -61,7 +61,7 @@ export function ViaturaClient() {
 
       <div className="detail">
         <div>
-          <Gallery photos={r.photos} body={r.body} color={r.color} label={`${r.brand} ${r.model}`} />
+          <Gallery photos={r.photos} label={`${r.brand} ${r.model}`} />
           <div style={{ marginTop: 28 }}>
             <span className={`plate${r.available ? "" : " is-off"}`}>{r.available ? r.category : "Indisponível de momento"}</span>
             <h1 className="h2" style={{ marginTop: 10 }}>{r.brand} {r.model}</h1>

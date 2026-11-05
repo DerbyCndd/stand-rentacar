@@ -29,7 +29,7 @@ export interface Vehicle {
   status: "disponivel" | "reservado" | "vendido";
   featured: boolean;
   isNew: boolean;
-  /** Fotografia real (data URL). Se vazia, usa-se a ilustração. */
+  /** Fotografia real (data URL). Se vazia, mostra-se "Foto em breve". */
   photos?: string[];
   colors?: ColorStock[];
 }

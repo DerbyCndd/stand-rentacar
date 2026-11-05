@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CarArt } from "@/components/CarArt";
+import { asset } from "@/lib/asset";
 import { HeroSearch } from "@/components/HeroSearch";
 import { Featured } from "@/components/Featured";
 import { site, wa } from "@/lib/site";
@@ -22,19 +22,34 @@ export default function Home() {
           <div>
             <p className="kicker">Stand &amp; Rent a Car · Braga</p>
             <h1 className="display" style={{ marginTop: 18 }}>
-              A sua próxima <span>viatura</span> começa aqui.
+              O poder de <span>escolher!</span>
             </h1>
             <p className="lead muted" style={{ marginTop: 22 }}>
-              Compre com garantia e financiamento à medida, ou alugue por um dia, uma semana ou o tempo que precisar. Com ou sem motorista.
+              O teu novo carro espera por ti! Compra com garantia e financiamento à medida, ou aluga por um dia, uma semana ou o tempo que precisares.
             </p>
             <ul className="hero-points">
-              <li>Revisão antes da entrega</li>
-              <li>Documentação tratada por nós</li>
-              <li>Resposta em minutos por WhatsApp</li>
+              <li>Usados, Novos &amp; Seminovos</li>
+              <li>Venda • Troca • Retoma</li>
+              <li>Financiamento até 24h*</li>
+              <li>Entregas em todo o país</li>
             </ul>
+            <p className="muted" style={{ marginTop: 18, fontSize: ".95rem" }}>
+              Parceiro oficial: <strong>Auto Narciso</strong>
+            </p>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 }}>
+              <a className="btn btn-primary" href={site.catalog} target="_blank" rel="noopener noreferrer">Ver catálogo no WhatsApp</a>
+              <a className="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
+              <a className="btn btn-ghost" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+            </div>
           </div>
           <div className="hero-art">
-            <CarArt body="suv" color="#d9d9d6" label="SUV prateado" />
+            {/* eslint-disable @next/next/no-img-element */}
+            <div className="hero-photos">
+              <img className="big" src={asset("/cars/golf-8-gti-clubsport-01.jpg")} alt="Volkswagen Golf 8 GTI Clubsport vermelho" />
+              <img src={asset("/cars/mercedes-a180-01.jpg")} alt="Mercedes-Benz Classe A branco" loading="lazy" />
+              <img src={asset("/cars/audi-a3-limousine-01.jpg")} alt="Audi A3 Limousine preto" loading="lazy" />
+            </div>
+            {/* eslint-enable @next/next/no-img-element */}
           </div>
         </div>
       </section>
@@ -138,7 +153,8 @@ export default function Home() {
             </div>
           </div>
           <div className="hero-art" style={{ transform: "none" }}>
-            <CarArt body="sedan" color="#ffb703" label="Berlina amarela" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img className="car-photo" src={asset("/cars/mini-clubman-hampton-01.jpg")} alt="MINI Cooper Clubman Hampton 50 Anos" loading="lazy" />
           </div>
         </div>
       </section>

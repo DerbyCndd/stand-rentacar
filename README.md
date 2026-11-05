@@ -34,7 +34,6 @@ npm run build      # gera a pasta out/ (site estático)
 | Nome, telefone, WhatsApp, morada, horário, palavra-passe do painel | `lib/site.ts` |
 | Viaturas e frota de exemplo, extras de aluguer | `lib/data.ts` |
 | Cores, tipografia, espaçamentos | variáveis no topo de `app/globals.css` |
-| Ilustrações das viaturas | `components/CarArt.tsx` |
 
 Depois de editar o WhatsApp em `lib/site.ts`, todos os botões passam a usar o seu número.
 
@@ -60,7 +59,6 @@ O GitHub Pages só serve ficheiros estáticos, **não tem servidor nem base de d
 2. **Ligar o site**: reescreva `lib/store.ts` para ler e gravar na API. As páginas não precisam de mudar, porque só usam `useVehicles`, `useRentals` e `useLeads`.
 3. **Autenticação a sério** no `/admin` (Supabase Auth ou similar) e regras de acesso na base de dados.
 4. **Alojamento com servidor** (Vercel, por exemplo): remova `output: "export"` de `next.config.ts` e passe as fichas de viatura para rotas dinâmicas (`/comprar/[id]`) para melhor SEO.
-5. Imagens reais das viaturas (as ilustrações atuais são vetoriais, sem fotos de terceiros).
 
 ## Estrutura
 

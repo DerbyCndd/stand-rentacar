@@ -164,14 +164,14 @@ function VehiclesAdmin() {
           <Pick id="vf" label="Combustível" value={f.fuel} options={FUELS} onChange={(v) => set("fuel", v)} />
           <Pick id="vg" label="Caixa" value={f.gearbox} options={GEARS} onChange={(v) => set("gearbox", v)} />
           <Pick id="vbody" label="Carroçaria" value={f.body} options={BODIES} onChange={(v) => set("body", v)} />
-          <div className="field"><label htmlFor="vc">Cor (ilustração)</label><input id="vc" className="input" type="color" value={f.color} onChange={(e) => set("color", e.target.value)} style={{ padding: 4 }} /></div>
+          <div className="field"><label htmlFor="vc">Cor principal</label><input id="vc" className="input" type="color" value={f.color} onChange={(e) => set("color", e.target.value)} style={{ padding: 4 }} /></div>
           <Text id="ve" label="Motor" value={f.engine} onChange={(v) => set("engine", v)} />
           <Text id="vw" label="Potência" value={f.power} onChange={(v) => set("power", v)} />
           <Text id="vs" label="Lugares" type="number" value={f.seats} onChange={(v) => set("seats", +v)} min={1} max={20} />
           <Pick id="vst" label="Estado" value={f.status} options={[["disponivel", "Disponível"], ["reservado", "Reservado"], ["vendido", "Vendido"]]} onChange={(v) => set("status", v)} />
           <div className="full field"><label htmlFor="vfe">Equipamento (separado por vírgulas)</label><input id="vfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Câmara 360°, Bancos em pele" /></div>
           <div className="full field"><label htmlFor="vd">Descrição</label><textarea id="vd" className="textarea" value={f.description} onChange={(e) => set("description", e.target.value)} /></div>
-          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
           <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} /></div>
           <label className="check"><input type="checkbox" checked={f.featured} onChange={(e) => set("featured", e.target.checked)} /> Destaque na página inicial</label>
           <label className="check"><input type="checkbox" checked={f.isNew} onChange={(e) => set("isNew", e.target.checked)} /> Viatura nova</label>
@@ -244,11 +244,11 @@ function RentalsAdmin() {
           <Pick id="rf" label="Combustível" value={f.fuel} options={FUELS} onChange={(v) => set("fuel", v)} />
           <Pick id="rg" label="Caixa" value={f.gearbox} options={GEARS} onChange={(v) => set("gearbox", v)} />
           <Pick id="rbody" label="Carroçaria" value={f.body} options={BODIES} onChange={(v) => set("body", v)} />
-          <div className="field"><label htmlFor="rcol">Cor (ilustração)</label><input id="rcol" className="input" type="color" value={f.color} onChange={(e) => set("color", e.target.value)} style={{ padding: 4 }} /></div>
+          <div className="field"><label htmlFor="rcol">Cor principal</label><input id="rcol" className="input" type="color" value={f.color} onChange={(e) => set("color", e.target.value)} style={{ padding: 4 }} /></div>
           <Text id="rs" label="Lugares" type="number" value={f.seats} onChange={(v) => set("seats", +v)} min={1} max={20} />
           <Text id="rbags" label="Malas" type="number" value={f.bags} onChange={(v) => set("bags", +v)} min={0} max={20} />
           <div className="full field"><label htmlFor="rfe">Incluído (separado por vírgulas)</label><input id="rfe" className="input" value={feat} onChange={(e) => setFeat(e.target.value)} placeholder="Ar condicionado, Bluetooth" /></div>
-          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} body={f.body} color={f.color} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
+          <div className="full"><PhotoField photos={f.photos ?? []} onChange={(p) => set("photos", p)} label={`${f.brand} ${f.model}`.trim() || "Pré-visualização"} /></div>
           <div className="full"><ColorsField colors={f.colors ?? []} onChange={(c) => set("colors", c)} unit="disponíveis" /></div>
           <label className="check full"><input type="checkbox" checked={f.available} onChange={(e) => set("available", e.target.checked)} /> Disponível para aluguer</label>
         </div>
@@ -304,7 +304,7 @@ function Dots({ colors }: { colors?: ColorStock[] }) {
   );
 }
 
-function PhotoField({ photos, onChange, body, color, label }: { photos: string[]; onChange: (p: string[]) => void; body: Body; color: string; label: string }) {
+function PhotoField({ photos, onChange, label }: { photos: string[]; onChange: (p: string[]) => void; label: string }) {
   const [err, setErr] = useState("");
   return (
     <div className="photo-edit">
@@ -330,15 +330,15 @@ function PhotoField({ photos, onChange, body, color, label }: { photos: string[]
           }}
         />
         {err && <span className="err" role="alert">{err}</span>}
-        <span className="hint">As imagens são reduzidas automaticamente. Sem fotografias, o site mostra a ilustração.</span>
+        <span className="hint">As imagens são reduzidas automaticamente. Sem fotografias, o site mostra “Foto em breve”.</span>
       </div>
       {photos.length === 0 ? (
-        <CarImage body={body} color={color} label={label} />
+        <CarImage label={label} />
       ) : (
         <ul className="photo-grid">
           {photos.map((p, n) => (
             <li key={p.slice(-40) + n}>
-              <CarImage photo={p} body={body} color={color} label={`${label} ${n + 1}`} />
+              <CarImage photo={p} label={`${label} ${n + 1}`} />
               <div className="actions">
                 {n > 0 && <button type="button" className="btn btn-ghost on-paper btn-sm" onClick={() => onChange([p, ...photos.filter((_, j) => j !== n)])}>Capa</button>}
                 <button type="button" className="btn btn-danger btn-sm" onClick={() => onChange(photos.filter((_, j) => j !== n))}>Remover</button>

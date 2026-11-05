@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 import { site } from "@/lib/site";
 
 export function Footer() {
@@ -7,9 +8,9 @@ export function Footer() {
       <div className="wrap">
         <div className="footer-grid">
           <div>
-            <Link prefetch={false} href="/" className="logo">
-              <i aria-hidden="true">A</i>
-              {site.name}
+            <Link prefetch={false} href="/" className="logo" aria-label={`${site.name} – página inicial`}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={asset("/logos/autoferasa.jpg")} alt="" width={140} height={56} className="logo-img" />
             </Link>
             <p className="muted" style={{ marginTop: 14, maxWidth: "34ch" }}>
               {site.description}
@@ -42,6 +43,9 @@ export function Footer() {
               <li><a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a></li>
               <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
               <li>{site.address}</li>
+              <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a></li>
+              <li><a href={site.catalog} target="_blank" rel="noopener noreferrer">Catálogo no WhatsApp</a></li>
             </ul>
           </div>
         </div>

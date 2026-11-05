@@ -11,7 +11,7 @@ export function VehicleCard({ v }: { v: Vehicle }) {
         <span className={`plate${v.isNew ? " is-new" : off ? " is-off" : ""}`}>
           {v.status === "vendido" ? "Vendido" : v.status === "reservado" ? "Reservado" : v.isNew ? "Novo" : v.year ?? "Especial"}
         </span>
-        <CarImage photo={v.photos?.[0]} body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
+        <CarImage photo={v.photos?.[0]} label={`${v.brand} ${v.model}`} />
       </div>
       <div className="vcard-body">
         <div>
@@ -38,7 +38,7 @@ export function RentalCard({ r, qs = "" }: { r: RentalCar; qs?: string }) {
     <Link prefetch={false} href={`/alugar/viatura/?id=${r.id}${qs}`} className={`vcard${r.available ? "" : " sold"}`}>
       <div className="vcard-art">
         <span className={`plate${r.available ? "" : " is-off"}`}>{r.available ? r.category : "Indisponível"}</span>
-        <CarImage photo={r.photos?.[0]} body={r.body} color={r.color} label={`${r.brand} ${r.model}`} />
+        <CarImage photo={r.photos?.[0]} label={`${r.brand} ${r.model}`} />
       </div>
       <div className="vcard-body">
         <div>

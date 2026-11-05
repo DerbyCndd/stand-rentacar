@@ -2,6 +2,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { asset } from "@/lib/asset";
 import { site, wa } from "@/lib/site";
 
 const links = [
@@ -20,8 +21,8 @@ export function Header() {
     <header className="header">
       <div className="wrap header-in">
         <Link prefetch={false} href="/" className="logo" aria-label={`${site.name} – página inicial`} onClick={() => setOpen(false)}>
-          <i aria-hidden="true">A</i>
-          {site.name}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={asset("/logos/autoferasa.jpg")} alt="" width={110} height={44} className="logo-img" />
         </Link>
         <nav id="menu" className={`nav${open ? " open" : ""}`} aria-label="Principal">
           {links.map((l) => (

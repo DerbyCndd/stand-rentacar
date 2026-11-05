@@ -37,7 +37,7 @@ export function VeiculoClient() {
 
       <div className="detail">
         <div>
-          <Gallery photos={v.photos} body={v.body} color={v.color} label={`${v.brand} ${v.model}`} />
+          <Gallery photos={v.photos} label={`${v.brand} ${v.model}`} />
 
           <div style={{ marginTop: 28 }}>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", alignItems: "center" }}>
