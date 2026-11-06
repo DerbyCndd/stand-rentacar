@@ -3,7 +3,7 @@ export const site = {
   name: "AutoFerasa",
   tagline: "Stand automóvel & Rent a Car em Braga",
   description:
-    "O poder de escolher! Usados, novos e seminovos. Venda, troca e retoma, financiamento até 24h e entregas em todo o país. Parceiro oficial: Auto Narciso.",
+    "O poder de escolher! Usados, novos e seminovos. Venda, troca e retoma, financiamento até 24h e entregas em todo o país.",
   phone: "+351 933 210 514",
   /** Apenas dígitos, com indicativo (usado nos links de WhatsApp). */
   whatsapp: "351933210514",
