@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { site } from "@/lib/site";
+import { SocialIcons } from "./SocialIcons";
 
 export function Footer() {
   return (
@@ -43,9 +44,8 @@ export function Footer() {
               <li><a href={`tel:${site.phone.replace(/\s/g, "")}`}>{site.phone}</a></li>
               <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
               <li>{site.address}</li>
-              <li><a href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a></li>
               <li><a href={site.catalog} target="_blank" rel="noopener noreferrer">Catálogo no WhatsApp</a></li>
+              <li style={{ marginTop: 6 }}><SocialIcons /></li>
             </ul>
           </div>
         </div>

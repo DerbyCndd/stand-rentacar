@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { asset } from "@/lib/asset";
 import { site, wa } from "@/lib/site";
+import { ThemeToggle } from "./ThemeToggle";
 
 const links = [
   { href: "/", label: "Início" },
@@ -31,6 +32,8 @@ export function Header() {
             </Link>
           ))}
         </nav>
+        <div className="header-tools">
+        <ThemeToggle />
         <a className="btn btn-primary btn-sm header-cta" href={wa("Olá! Gostaria de mais informações.")} target="_blank" rel="noopener noreferrer">
           WhatsApp
         </a>
@@ -46,6 +49,7 @@ export function Header() {
             {open ? <path d="M5 5l14 14M19 5L5 19" /> : <path d="M3 7h18M3 12h18M3 17h18" />}
           </svg>
         </button>
+        </div>
       </div>
     </header>
   );

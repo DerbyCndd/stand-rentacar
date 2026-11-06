@@ -142,7 +142,7 @@ export function ComprarClient() {
               <input id="simp" className="input" type="number" min={1000} step={500} value={simPrice} onChange={(e) => setSimPrice(Math.max(0, +e.target.value))} />
             </div>
           </div>
-          <div className="panel" style={{ color: "var(--ink)" }}>
+          <div className="panel" style={{ color: "var(--text)" }}>
             <FinanceSim price={simPrice} />
           </div>
         </div>

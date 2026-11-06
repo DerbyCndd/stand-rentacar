@@ -2,6 +2,7 @@ import Link from "next/link";
 import { asset } from "@/lib/asset";
 import { HeroSearch } from "@/components/HeroSearch";
 import { HeroBrands } from "@/components/HeroBrands";
+import { SocialIcons } from "@/components/SocialIcons";
 import { Featured } from "@/components/Featured";
 import { site, wa } from "@/lib/site";
 
@@ -38,8 +39,7 @@ export default function Home() {
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 }}>
               <a className="btn btn-primary" href={site.catalog} target="_blank" rel="noopener noreferrer">Ver catálogo no WhatsApp</a>
-              <a className="btn btn-ghost" href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-              <a className="btn btn-ghost" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+              <SocialIcons />
             </div>
           </div>
           <div className="hero-art">

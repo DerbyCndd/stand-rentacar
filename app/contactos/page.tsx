@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { LeadForm } from "@/components/LeadForm";
+import { SocialIcons } from "@/components/SocialIcons";
 import { site, wa } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -32,8 +33,7 @@ export default function Page() {
               <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 18 }}>
                 <a className="btn btn-wa btn-sm" href={wa("Olá! Gostaria de mais informações.")} target="_blank" rel="noopener noreferrer">WhatsApp</a>
                 <a className="btn btn-ghost on-paper btn-sm" href={site.catalog} target="_blank" rel="noopener noreferrer">Catálogo</a>
-                <a className="btn btn-ghost on-paper btn-sm" href={site.instagram} target="_blank" rel="noopener noreferrer">Instagram</a>
-                <a className="btn btn-ghost on-paper btn-sm" href={site.facebook} target="_blank" rel="noopener noreferrer">Facebook</a>
+                <SocialIcons small />
                 <a className="btn btn-dark btn-sm" href={`https://www.google.com/maps/search/${encodeURIComponent(site.address)}`} target="_blank" rel="noopener noreferrer">Ver no mapa</a>
               </div>
             </div>
