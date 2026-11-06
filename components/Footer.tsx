@@ -14,7 +14,7 @@ export function Footer() {
               <img src={asset("/logos/autoferasa.jpg")} alt="" width={140} height={56} className="logo-img" />
             </Link>
             <p className="muted" style={{ marginTop: 14, maxWidth: "34ch" }}>
-              {site.description}
+              {site.description.replace(/ Parceiro oficial:.*$/, "")}
             </p>
             <a className="partner" href="https://autonarciso.pt" target="_blank" rel="noopener noreferrer" aria-label="Parceiro oficial: Auto Narciso (abre autonarciso.pt)">
               <span>Parceiro oficial</span>
