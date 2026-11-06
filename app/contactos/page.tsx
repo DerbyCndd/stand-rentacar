@@ -4,7 +4,7 @@ import { SocialIcons } from "@/components/SocialIcons";
 import { site, wa } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: "Contactos",
+  title: "Contactos e morada do stand em Braga",
   description: "Fale connosco por WhatsApp, telefone ou visite o stand em Braga. Marque uma visita ou peça uma proposta.",
 };
 

@@ -141,6 +141,21 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="section" aria-labelledby="sobre">
+        <div className="wrap" style={{ maxWidth: 860 }}>
+          <p className="kicker">Stand automóvel em Braga</p>
+          <h2 id="sobre" className="h2" style={{ marginTop: 12 }}>Carros usados e seminovos em Braga, com garantia</h2>
+          <p className="lead muted" style={{ marginTop: 16, maxWidth: "none" }}>
+            A {site.name} é um stand automóvel em Braga com carros usados, seminovos e novos de marcas como BMW, Mercedes-Benz, Audi, Volkswagen, MINI, Smart e Fiat.
+            Todas as viaturas têm garantia de 18 meses e revisão efetuada.
+          </p>
+          <p className="lead muted" style={{ marginTop: 12, maxWidth: "none" }}>
+            Fazemos venda, troca e retoma, financiamento com resposta até 24h e entregas em todo o país. Aceitamos Título de Residência e CPLP.
+            Precisa de uma viatura por pouco tempo? Temos também Rent a Car.
+          </p>
+        </div>
+      </section>
+
       <section className="section dark-2" aria-labelledby="visita">
         <div className="wrap band">
           <div>

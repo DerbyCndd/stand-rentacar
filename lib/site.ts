@@ -1,6 +1,8 @@
 /** Dados da empresa. Edite aqui: nome, contactos e morada aparecem em todo o site. */
 export const site = {
   name: "AutoFerasa",
+  /** Endereço público do site (sem "/" final). Quando tiver domínio próprio, troque aqui. */
+  url: "https://derbycndd.github.io/stand-rentacar",
   tagline: "Stand automóvel & Rent a Car em Braga",
   description:
     "O poder de escolher! Usados, novos e seminovos. Venda, troca e retoma, financiamento até 24h e entregas em todo o país.",
