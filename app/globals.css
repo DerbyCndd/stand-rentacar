@@ -350,3 +350,9 @@ tr:last-child td { border-bottom: 0; }
 :root[data-theme="dark"] .theme-btn .sun { display: none; }
 :root[data-theme="dark"] .theme-btn .moon { display: block; }
 .header-tools { display: flex; align-items: center; gap: 10px; }
+
+/* Parceiro oficial */
+.partner { display: inline-flex; align-items: center; gap: 14px; margin-top: 18px; padding: 8px 14px 8px 16px; border: 1px solid var(--line-dark); border-radius: var(--radius); background: rgba(255,255,255,.04); color: var(--on-dark-muted); text-decoration: none; transition: border-color .2s var(--ease), background .2s var(--ease); }
+.partner span { font-family: var(--font-display); font-weight: 700; font-size: .75rem; letter-spacing: .14em; text-transform: uppercase; }
+.partner img { height: 44px; width: auto; border-radius: 4px; background: #f7f7f7; padding: 2px 6px; }
+.partner:hover { border-color: var(--amber); background: rgba(255,255,255,.08); color: var(--on-dark); }

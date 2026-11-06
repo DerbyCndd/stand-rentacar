@@ -34,9 +34,11 @@ export default function Home() {
               <li>Financiamento até 24h*</li>
               <li>Entregas em todo o país</li>
             </ul>
-            <p className="muted" style={{ marginTop: 18, fontSize: ".95rem" }}>
-              Parceiro oficial: <a href="https://autonarciso.pt" target="_blank" rel="noopener noreferrer"><strong>Auto Narciso</strong></a>
-            </p>
+            <a className="partner" href="https://autonarciso.pt" target="_blank" rel="noopener noreferrer" aria-label="Parceiro oficial: Auto Narciso (abre autonarciso.pt)">
+              <span>Parceiro oficial</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={asset("/logos/auto-narciso-logo.png")} alt="Auto Narciso – Comércio Automóvel" width={148} height={55} />
+            </a>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 }}>
               <a className="btn btn-primary" href={site.catalog} target="_blank" rel="noopener noreferrer">Ver catálogo no WhatsApp</a>
               <SocialIcons />

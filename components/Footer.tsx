@@ -16,6 +16,11 @@ export function Footer() {
             <p className="muted" style={{ marginTop: 14, maxWidth: "34ch" }}>
               {site.description}
             </p>
+            <a className="partner" href="https://autonarciso.pt" target="_blank" rel="noopener noreferrer" aria-label="Parceiro oficial: Auto Narciso (abre autonarciso.pt)">
+              <span>Parceiro oficial</span>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={asset("/logos/auto-narciso-logo.png")} alt="Auto Narciso – Comércio Automóvel" width={148} height={55} />
+            </a>
           </div>
           <div>
             <h4>Explorar</h4>
