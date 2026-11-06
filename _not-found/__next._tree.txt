@@ -1,0 +1,6 @@
+:HL["/stand-rentacar/_next/static/chunks/29jofg7rvrdkb.css","style"]
+:HL["/stand-rentacar/logos/autoferasa.jpg","image"]
+:HL["/stand-rentacar/logos/auto-narciso-logo.png","image"]
+2:[["children",{"s":"__PAGE__","h":160}]]
+1:[["children",{"s":"/_not-found","h":64,"c":"$Q2"}]]
+0:{"b":"u2tocB3x_GXGTx0ZZr4Vg","t":{"t":{"s":"","h":16,"c":"$Q1"}}}

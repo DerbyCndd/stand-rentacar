@@ -1,0 +1,5 @@
+User-Agent: *
+Allow: /
+Disallow: /admin/
+
+Sitemap: https://derbycndd.github.io/stand-rentacar/sitemap.xml
