@@ -34,7 +34,7 @@ export default function Home() {
               <li>Entregas em todo o país</li>
             </ul>
             <p className="muted" style={{ marginTop: 18, fontSize: ".95rem" }}>
-              Parceiro oficial: <strong>Auto Narciso</strong>
+              Parceiro oficial: <a href="https://autonarciso.pt" target="_blank" rel="noopener noreferrer"><strong>Auto Narciso</strong></a>
             </p>
             <div style={{ display: "flex", gap: 12, flexWrap: "wrap", marginTop: 20 }}>
               <a className="btn btn-primary" href={site.catalog} target="_blank" rel="noopener noreferrer">Ver catálogo no WhatsApp</a>
